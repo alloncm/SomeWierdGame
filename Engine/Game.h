@@ -41,6 +41,7 @@ private:
 	/********************************/
 	/*  User Functions              */
 	void MakeFireBall();
+	void DestroyFireBalls(Rect<int> border);
 	/********************************/
 private:
 	MainWindow& wnd;

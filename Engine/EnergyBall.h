@@ -20,4 +20,5 @@ public:
 	void SetDirection(const Vec2& v);
 	int GetWidth();
 	int GetHeight();
+	const Rect<int> GetRect()const;
 };

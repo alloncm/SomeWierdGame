@@ -54,8 +54,34 @@ public:
 		return this->bRight;
 	}
 	bool IsInside(const Vec2_<T>& l)const
+	//not working as intend 
+	//needs to fix
 	{
 		if ((l.x > tLeft.x&&l.x < bRight.x) && (l.y > tLeft.y&&l.y < bRight.y))
+		{
+			return true;
+		}
+		return false;
+	}
+	bool IsColliding(const Rect<T>& l)const
+	{
+		if (tLeft.x > l.tLeft.x&&tLeft.x < l.bRight.x)
+			//left side is inside
+		{
+			return true;
+		}
+		if (bRight.x < l.bRight.x&&bRight.x > l.tLeft.x)
+			//right side is inside
+		{
+			return true;
+		}
+		if (tLeft.y > l.tLeft.y&&tLeft.y < l.bRight.y)
+			//up side is inside
+		{
+			return true;
+		}
+		if (bRight.y < l.bRight.y&&bRight.y > l.tLeft.y)
+			//bottom side is inside
 		{
 			return true;
 		}

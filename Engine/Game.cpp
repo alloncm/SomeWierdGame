@@ -127,3 +127,15 @@ void Game::MakeFireBall()
 		countB++;
 	}
 }
+
+void Game::DestroyFireBalls(Rect<int> border)
+{
+	for (int i = 0; i < countB; i++)
+	{
+		bool col = balls[i].GetRect().IsColliding(border);
+		if (!col)
+		{
+
+		}
+	}
+}
