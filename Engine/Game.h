@@ -53,7 +53,7 @@ private:
 	FrameTimer ft;
 	Font f;
 	EnergyBall ball;
-	EnergyBall* balls;
+	EnergyBall** balls;
 	int countB;
 	/********************************/
 };

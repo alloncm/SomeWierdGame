@@ -31,7 +31,7 @@ Game::Game(MainWindow& wnd)
 	ball("Energy.bmp", 5, { 200,200 }, { 1,0 }),
 	countB(0)
 {
-	balls = new EnergyBall [countB];
+	balls = new EnergyBall*[countB];
 }
 
 void Game::Go()
@@ -70,7 +70,7 @@ void Game::UpdateModel()
 	cha.Update(ft.Mark());
 	for (int i = 0; i < countB; i++)
 	{
-		balls[i].Update();
+		balls[i]->Update();
 	}
 }
 
@@ -79,7 +79,7 @@ void Game::ComposeFrame()
 	cha.Draw(gfx);
 	for (int i = 0; i < countB; i++)
 	{
-		balls[i].Draw(gfx);
+		balls[i]->Draw(gfx);
 	}
 }
 
@@ -106,24 +106,37 @@ void Game::MakeFireBall()
 	{
 		delete[] balls;
 		
-		balls = new EnergyBall[countB + 1];
-		balls[countB] = ball;
-		balls[countB].SetDirection(v);
+		balls = new EnergyBall*[countB + 1];
+		balls[countB] = new EnergyBall;
+		*balls[countB] = ball;
+		balls[countB]->SetDirection(v);
 		countB++;
 	}
 	else
 	{
-		EnergyBall* temp = new EnergyBall[countB + 1];
+		int j = 0;					//counts the number of elements in balls
+		EnergyBall** temp = new EnergyBall* [countB + 1];		//temporary place to copy only the valid elemets 
 		for (int i = 0; i < countB; i++)
 		{
-			temp[i] = balls[i];
+			if (balls[i] != nullptr)		//copies only if not nullptr
+			{
+				temp[j] = balls[i];
+				j++;						//keep track of how many copied
+			}
 		}
-		delete[] balls;
-		balls = temp;
+		//delete[] balls;
+		//balls = temp;
+		//temp = nullptr;
+		balls = new EnergyBall* [j];		//realocate the memory 
+		for (int i = 0; i < j; i++)			//copies the loctions of the values to the new alocated memory
+		{
+			balls[i] = temp[i];
+		}			
 		temp = nullptr;
-		balls[countB] = ball;
-		
-		balls[countB].SetDirection(v);
+		countB = j;
+		balls[countB] = new EnergyBall;			//alocate memory for another element
+		*balls[countB] = ball;
+		balls[countB]->SetDirection(v);			//sets the directions1
 		countB++;
 	}
 }
@@ -132,7 +145,7 @@ void Game::DestroyFireBalls(Rect<int> border)
 {
 	for (int i = 0; i < countB; i++)
 	{
-		bool col = balls[i].GetRect().IsColliding(border);
+		bool col = balls[i]->GetRect().IsColliding(border);
 		if (!col)
 		{
 
