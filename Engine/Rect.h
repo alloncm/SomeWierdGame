@@ -65,27 +65,29 @@ public:
 	}
 	bool IsColliding(const Rect<T>& l)const
 	{
+		bool sideInside = false;
+		bool baseInside = false;
 		if (tLeft.x > l.tLeft.x&&tLeft.x < l.bRight.x)
 			//left side is inside
 		{
-			return true;
+			sideInside = true;
 		}
 		if (bRight.x < l.bRight.x&&bRight.x > l.tLeft.x)
 			//right side is inside
 		{
-			return true;
+			sideInside = true;
 		}
 		if (tLeft.y > l.tLeft.y&&tLeft.y < l.bRight.y)
 			//up side is inside
 		{
-			return true;
+			baseInside = true;
 		}
 		if (bRight.y < l.bRight.y&&bRight.y > l.tLeft.y)
 			//bottom side is inside
 		{
-			return true;
+			baseInside = true;
 		}
-		return false;
+		return baseInside && sideInside;
 	}
 };
 typedef Rect<int> RectI;

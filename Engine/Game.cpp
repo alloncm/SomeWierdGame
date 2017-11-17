@@ -27,7 +27,7 @@ Game::Game(MainWindow& wnd)
 	gfx(wnd),
 	link({ 100,100 }, 170, 90, 90),
 	f("Consolas13x24.bmp"),
-	cha("knightTest32x48.bmp", 50.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f),
+	cha("knightTest32x48.bmp", 100.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f),
 	ball("Energy.bmp", 5, { 200,200 }, { 1,0 }),
 	countB(0)
 {
@@ -44,7 +44,7 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	
+	DestroyFireBalls({ { 100,100 },{ gfx.ScreenWidth - 100,gfx.ScreenHeight - 100 } });
 	Vec2 dir(0.0f,0.0f);
 	if (wnd.kbd.KeyIsPressed(VK_LEFT))
 	{
@@ -70,8 +70,12 @@ void Game::UpdateModel()
 	cha.Update(ft.Mark());
 	for (int i = 0; i < countB; i++)
 	{
-		balls[i]->Update();
+		if (balls[i] != nullptr)
+		{
+			balls[i]->Update();
+		}
 	}
+	
 }
 
 void Game::ComposeFrame()
@@ -79,7 +83,10 @@ void Game::ComposeFrame()
 	cha.Draw(gfx);
 	for (int i = 0; i < countB; i++)
 	{
-		balls[i]->Draw(gfx);
+		if (balls[i] != nullptr)
+		{
+			balls[i]->Draw(gfx);
+		}
 	}
 }
 
@@ -121,18 +128,22 @@ void Game::MakeFireBall()
 			if (balls[i] != nullptr)		//copies only if not nullptr
 			{
 				temp[j] = balls[i];
+				balls[i] = nullptr;
 				j++;						//keep track of how many copied
 			}
 		}
 		//delete[] balls;
 		//balls = temp;
 		//temp = nullptr;
-		balls = new EnergyBall* [j];		//realocate the memory 
+		delete[] balls;
+		balls = new EnergyBall* [j+1];		//realocate the memory 
 		for (int i = 0; i < j; i++)			//copies the loctions of the values to the new alocated memory
 		{
 			balls[i] = temp[i];
+			temp[i] = nullptr;
 		}			
 		temp = nullptr;
+		delete[] temp;
 		countB = j;
 		balls[countB] = new EnergyBall;			//alocate memory for another element
 		*balls[countB] = ball;
@@ -145,10 +156,14 @@ void Game::DestroyFireBalls(Rect<int> border)
 {
 	for (int i = 0; i < countB; i++)
 	{
-		bool col = balls[i]->GetRect().IsColliding(border);
-		if (!col)
+		if (balls[i] != nullptr)
 		{
-
+			bool col = balls[i]->GetRect().IsColliding(border);
+			if (!col)
+			{
+				delete balls[i];
+				balls[i] = nullptr;
+			}
 		}
 	}
 }

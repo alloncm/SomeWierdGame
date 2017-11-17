@@ -39,5 +39,5 @@ int EnergyBall::GetHeight()
 
 const Rect<int> EnergyBall::GetRect() const
 {
-	return sprite.GetRect();
+	return{ {(int)pos.x,(int)pos.y},{(int)pos.x + sprite.GetWidth(),(int)pos.y + sprite.GetHeight() } };
 }
