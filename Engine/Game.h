@@ -42,6 +42,7 @@ private:
 	/*  User Functions              */
 	void MakeFireBall();
 	void DestroyFireBalls(Rect<int> border);
+	Vec2 GetBallMatchingPos();
 	/********************************/
 private:
 	MainWindow& wnd;

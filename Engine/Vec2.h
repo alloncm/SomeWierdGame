@@ -24,7 +24,7 @@ public:
 	}
 	Vec2_<T> operator+ (const Vec2_ <T> &v)const
 	{
-		return (x + v.x, y + v.y);
+		return{ x + v.x, y + v.y };
 	}
 	Vec2_<T> operator- (const Vec2_ <T>&v)const
 	{

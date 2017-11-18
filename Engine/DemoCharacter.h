@@ -11,6 +11,8 @@ public:
 	void SetDirections(const Vec2& dir);
 	const Vec2 GetDirection() const;
 	RectI GetCharacterRect()const;
+	void SetPosition(const Vec2& p);
+	const Vec2& GetPosition();
 
 private:
 	enum class State

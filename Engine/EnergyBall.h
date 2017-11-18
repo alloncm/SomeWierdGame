@@ -21,4 +21,5 @@ public:
 	int GetWidth();
 	int GetHeight();
 	const Rect<int> GetRect()const;
+	void SetLocation(const Vec2& p);
 };

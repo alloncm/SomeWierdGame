@@ -24,7 +24,7 @@ void EnergyBall::Update()
 
 void EnergyBall::SetDirection(const Vec2 & v)
 {
-	direc = v;
+	direc = v*speed;
 }
 
 int EnergyBall::GetWidth()
@@ -40,4 +40,10 @@ int EnergyBall::GetHeight()
 const Rect<int> EnergyBall::GetRect() const
 {
 	return{ {(int)pos.x,(int)pos.y},{(int)pos.x + sprite.GetWidth(),(int)pos.y + sprite.GetHeight() } };
+}
+
+void EnergyBall::SetLocation(const Vec2 & p)
+{
+	pos.x = p.x;
+	pos.y = p.y;
 }

@@ -28,7 +28,7 @@ Game::Game(MainWindow& wnd)
 	link({ 100,100 }, 170, 90, 90),
 	f("Consolas13x24.bmp"),
 	cha("knightTest32x48.bmp", 100.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f),
-	ball("Energy.bmp", 5, { 200,200 }, { 1,0 }),
+	ball("energy18x18.bmp", 5, { 200,200 }, { 1,0 }),
 	countB(0)
 {
 	balls = new EnergyBall*[countB];
@@ -62,7 +62,7 @@ void Game::UpdateModel()
 	{
 		dir.y += 1;
 	}
-	if (wnd.kbd.ReadChar() == ' ')
+	if (wnd.kbd.KeyIsPressed(VK_SPACE))
 	{
 		MakeFireBall();
 	}
@@ -92,7 +92,10 @@ void Game::ComposeFrame()
 
 void Game::MakeFireBall()
 {
-	Vec2 v = cha.GetDirection();
+	Vec2 v = cha.GetDirection();		//sets the position of the ball to match the character
+	
+	ball.SetLocation(cha.GetPosition());
+	//updates the directoio of the ball based on the velocity of the caracter
 	if (v.x > 1)
 	{
 		v.x = 1;
@@ -109,19 +112,19 @@ void Game::MakeFireBall()
 	{
 		v.y = -1;
 	}
+	ball.SetDirection(v);
 	if (countB == 0)
 	{
 		delete[] balls;
-		
+
 		balls = new EnergyBall*[countB + 1];
 		balls[countB] = new EnergyBall;
-		*balls[countB] = ball;
-		balls[countB]->SetDirection(v);
+		*balls[countB] = ball;			
 		countB++;
 	}
 	else
 	{
-		int j = 0;					//counts the number of elements in balls
+		int j = 0;								//counts the number of elements in balls
 		EnergyBall** temp = new EnergyBall* [countB + 1];		//temporary place to copy only the valid elemets 
 		for (int i = 0; i < countB; i++)
 		{
@@ -131,23 +134,19 @@ void Game::MakeFireBall()
 				balls[i] = nullptr;
 				j++;						//keep track of how many copied
 			}
-		}
-		//delete[] balls;
-		//balls = temp;
-		//temp = nullptr;
+		}                
 		delete[] balls;
 		balls = new EnergyBall* [j+1];		//realocate the memory 
 		for (int i = 0; i < j; i++)			//copies the loctions of the values to the new alocated memory
 		{
 			balls[i] = temp[i];
 			temp[i] = nullptr;
-		}			
-		temp = nullptr;
+		}
 		delete[] temp;
+		temp = nullptr;
 		countB = j;
 		balls[countB] = new EnergyBall;			//alocate memory for another element
-		*balls[countB] = ball;
-		balls[countB]->SetDirection(v);			//sets the directions1
+		*balls[countB] = ball;					
 		countB++;
 	}
 }
@@ -163,7 +162,18 @@ void Game::DestroyFireBalls(Rect<int> border)
 			{
 				delete balls[i];
 				balls[i] = nullptr;
+				balls[i] = balls[countB-1];
+				countB--;
 			}
 		}
 	}
 }
+
+
+/*
+Vec2 Game::GetBallMatchingPos()
+{
+	
+}
+*/
+

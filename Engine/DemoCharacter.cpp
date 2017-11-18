@@ -101,3 +101,14 @@ RectI DemoCharacter::GetCharacterRect() const
 {
 	return RectI({ (int)pos.x,(int)pos.y }, { (int)pos.x + width,(int)pos.y + height });
 }
+
+void DemoCharacter::SetPosition(const Vec2 & p)
+{
+	pos.x = p.x;
+	pos.y = p.y;
+}
+
+const Vec2 & DemoCharacter::GetPosition()
+{
+	return pos;
+}
