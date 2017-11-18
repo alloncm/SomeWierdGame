@@ -13,6 +13,8 @@ public:
 	RectI GetCharacterRect()const;
 	void SetPosition(const Vec2& p);
 	const Vec2& GetPosition();
+	int GetHeight();
+	int GetWidth();
 
 private:
 	enum class State

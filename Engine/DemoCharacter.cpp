@@ -112,3 +112,13 @@ const Vec2 & DemoCharacter::GetPosition()
 {
 	return pos;
 }
+
+int DemoCharacter::GetHeight()
+{
+	return height;
+}
+
+int DemoCharacter::GetWidth()
+{
+	return width;
+}

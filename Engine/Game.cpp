@@ -94,7 +94,7 @@ void Game::MakeFireBall()
 {
 	Vec2 v = cha.GetDirection();		//sets the position of the ball to match the character
 	
-	ball.SetLocation(cha.GetPosition());
+	ball.SetLocation(GetBallMatchingPos());
 	//updates the directoio of the ball based on the velocity of the caracter
 	if (v.x > 1)
 	{
@@ -170,10 +170,33 @@ void Game::DestroyFireBalls(Rect<int> border)
 }
 
 
-/*
+
 Vec2 Game::GetBallMatchingPos()
 {
+	Vec2 vtr = cha.GetPosition();
 	
+	Vec2 v = cha.GetDirection();
+	Vec2_<int> p ((int)v.x,(int)v.y);
+	if (p.x == 1)	//looking right
+	{
+		vtr.x += cha.GetWidth();
+	}
+	if (p.x == -1)	//looking left
+	{
+		vtr.x -= ball.GetWidth();
+	}
+	if (p.x == 0 && p.y == -1)	//looking up
+	{
+		vtr.x += ((cha.GetWidth() / 2) - (ball.GetWidth() / 2));
+		vtr.y -= ball.GetHeight();
+	}
+	if (p.x == 0 && p.y == 1)	//looking down
+	{
+		vtr.x += ((cha.GetWidth() / 2) - (ball.GetWidth() / 2));
+		vtr.y += cha.GetHeight();
+	}
+	
+	return vtr;
 }
-*/
+
 
