@@ -176,6 +176,23 @@ Vec2 Game::GetBallMatchingPos()
 	Vec2 vtr = cha.GetPosition();
 	
 	Vec2 v = cha.GetDirection();
+	//make sure v values are 1 or 0
+	if (v.x > 0 && v.x < 1)
+	{
+		v.x = 1;
+	}
+	else if (v.x < 0 && v.x > -1)
+	{
+		v.x = -1;
+	}
+	if (v.y > 0 && v.y < 1)
+	{
+		v.y = 1;
+	}
+	else if (v.y < 0 && v.y > -1)
+	{
+		v.y = -1;
+	}
 	Vec2_<int> p ((int)v.x,(int)v.y);
 	if (p.x == 1)	//looking right
 	{

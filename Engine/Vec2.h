@@ -62,11 +62,21 @@ public:
 		y -= v;
 		return *this;
 	}
+	Vec2_<T>& operator/=(T v)
+	{
+		x /= v;
+		y /= v;
+		return *this;
+	}
 	float GetLength()
 	{
 		return sqrt(x*x + y*y);
 	}
-	
+	Vec2_<T>& Normalize()
+	{
+		*this /= GetLength();
+		return *this;
+	}
 };
 
 typedef Vec2_<float> Vec2;

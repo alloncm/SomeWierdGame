@@ -77,6 +77,7 @@ const Vec2  DemoCharacter::GetDirection() const
 	if (vel != dir)
 	{
 		dir = vel;
+		dir.Normalize();
 	}
 	else if ((int)iCurState == 0 || (int)iCurState == 1)
 	{
