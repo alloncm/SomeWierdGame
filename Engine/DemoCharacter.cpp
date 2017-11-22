@@ -2,19 +2,13 @@
 
 DemoCharacter::DemoCharacter(std::string s, float spe, Vec2 p, int w, int h, Vec2_<int> searchStart,int animLong,float ht)
 	:
-	sprite(s),
-	speed(spe),
-	pos(p),
-	vel(0.0,0.0),
-	height(h),
-	width(w),
+	D2Character(s,spe,p,{0,0},Colors::Magenta,w,h),
 	iCurState(State::StandDown)
 {
-	Color back = Colors::Magenta;
 	for (int i = 0; i < (int)State::Count; i++)
 	{
-		animations.emplace_back(Animation(searchStart.x+w, searchStart.y+(h*i), w, h, animLong,sprite, ht, back));
-		animations.emplace_back(Animation(searchStart.x, searchStart.y+(h*i), w, h, 1,sprite, ht, back));
+		animations.emplace_back(Animation(searchStart.x+w, searchStart.y+(h*i), w, h, animLong,sprite, ht, backGround));
+		animations.emplace_back(Animation(searchStart.x, searchStart.y+(h*i), w, h, 1,sprite, ht, backGround));
 	}
 }
 
@@ -26,11 +20,10 @@ void DemoCharacter::Draw(Graphics & gfx)
 void DemoCharacter::Update(float dt)
 {
 	pos += vel*dt;
-	
 	animations[(int)iCurState].Update(dt);
 }
 
-void DemoCharacter::SetDirections(const Vec2 & dir)
+void DemoCharacter::SetDirection(const Vec2 & dir)
 {
 
 	if (dir.x < 0)
@@ -96,30 +89,4 @@ const Vec2  DemoCharacter::GetDirection() const
 		dir.y = -1;
 	}
 	return dir;
-}
-
-RectI DemoCharacter::GetCharacterRect() const
-{
-	return RectI({ (int)pos.x,(int)pos.y }, { (int)pos.x + width,(int)pos.y + height });
-}
-
-void DemoCharacter::SetPosition(const Vec2 & p)
-{
-	pos.x = p.x;
-	pos.y = p.y;
-}
-
-const Vec2 & DemoCharacter::GetPosition()
-{
-	return pos;
-}
-
-int DemoCharacter::GetHeight()
-{
-	return height;
-}
-
-int DemoCharacter::GetWidth()
-{
-	return width;
 }

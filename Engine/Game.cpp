@@ -66,7 +66,7 @@ void Game::UpdateModel()
 	{
 		MakeFireBall();
 	}
-	cha.SetDirections(dir);
+	cha.SetDirection(dir);
 	cha.Update(ft.Mark());
 	float dt = ftB.Mark();
 	for (int i = 0; i < countB; i++)

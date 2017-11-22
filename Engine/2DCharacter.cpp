@@ -1,12 +1,14 @@
 #include "2DCharacter.h"
 
-D2Character::D2Character(std::string source, float speed, Vec2 position, Vec2 vel, Color bg)
+D2Character::D2Character(std::string source, float speed, Vec2 position, Vec2 vel, Color bg,int w,int h)
 	:
 	sprite(source),
 	speed(speed),
 	pos(position),
 	vel(vel),
-	backGround(bg)
+	backGround(bg),
+	width(w),
+	height(h)
 {
 }
 
@@ -45,4 +47,9 @@ void D2Character::SetLocation(const Vec2 & p)
 {
 	pos.x = p.x;
 	pos.y = p.y;
+}
+
+const Vec2 & D2Character::GetPosition() const
+{
+	return pos;
 }
