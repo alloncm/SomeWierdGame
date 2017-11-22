@@ -62,7 +62,9 @@ void Game::UpdateModel()
 	{
 		dir.y += 1;
 	}
-	if (wnd.kbd.KeyIsPressed(VK_SPACE))
+	
+	Keyboard::Event e = wnd.kbd.ReadKey();
+	if ( e.GetCode() == VK_SPACE && e.IsPress() )
 	{
 		MakeFireBall();
 	}

@@ -11,6 +11,6 @@ public:
 	EnergyBall(std::string source,float speed,Vec2 position,Vec2 dir);
 	EnergyBall() = default;
 	EnergyBall& operator=(EnergyBall& b) = default;
-	virtual void SetDirection(const Vec2& v);
-	virtual void Update(float dt);
+	virtual void SetDirection(const Vec2& v) override;
+	virtual void Update(float dt)override;
 };

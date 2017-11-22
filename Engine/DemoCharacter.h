@@ -6,9 +6,9 @@ class DemoCharacter : public D2Character
 {
 public:
 	DemoCharacter(std::string s, float spe, Vec2 p, int w, int h, Vec2_<int> searchStart,int animLong,float ht);
-	virtual void Draw(Graphics& gfx);
-	virtual void Update(float dt);
-	virtual void SetDirection(const Vec2& dir);
+	virtual void Draw(Graphics& gfx)override;
+	virtual void Update(float dt)override;
+	virtual void SetDirection(const Vec2& dir)override;
 	const Vec2 GetDirection() const;
 private:
 	enum class State
