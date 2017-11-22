@@ -29,6 +29,7 @@ Game::Game(MainWindow& wnd)
 	f("Consolas13x24.bmp"),
 	cha("knightTest32x48.bmp", 100.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f),
 	ball("energy18x18.bmp", 250, { 200,200 }, { 1,0 }),
+	bGuy("badGuy32x48.bmp", 100.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f),
 	countB(0)
 {
 	balls = nullptr;
@@ -84,6 +85,7 @@ void Game::UpdateModel()
 void Game::ComposeFrame()
 {
 	cha.Draw(gfx);
+	bGuy.Draw(gfx);
 	for (int i = 0; i < countB; i++)
 	{
 		if (balls[i] != nullptr)

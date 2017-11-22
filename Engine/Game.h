@@ -57,5 +57,6 @@ private:
 	EnergyBall ball;
 	EnergyBall** balls;
 	int countB;
+	DemoCharacter bGuy;
 	/********************************/
 };
