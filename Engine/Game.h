@@ -52,6 +52,7 @@ private:
 	Character link;
 	DemoCharacter cha;
 	FrameTimer ft;
+	FrameTimer ftB;
 	Font f;
 	EnergyBall ball;
 	EnergyBall** balls;

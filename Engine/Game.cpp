@@ -28,10 +28,10 @@ Game::Game(MainWindow& wnd)
 	link({ 100,100 }, 170, 90, 90),
 	f("Consolas13x24.bmp"),
 	cha("knightTest32x48.bmp", 100.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f),
-	ball("energy18x18.bmp", 5, { 200,200 }, { 1,0 }),
+	ball("energy18x18.bmp", 250, { 200,200 }, { 1,0 }),
 	countB(0)
 {
-	balls = new EnergyBall*[countB];
+	balls = nullptr;
 }
 
 void Game::Go()
@@ -68,11 +68,12 @@ void Game::UpdateModel()
 	}
 	cha.SetDirections(dir);
 	cha.Update(ft.Mark());
+	float dt = ftB.Mark();
 	for (int i = 0; i < countB; i++)
 	{
 		if (balls[i] != nullptr)
 		{
-			balls[i]->Update();
+			balls[i]->Update(dt);
 		}
 	}
 	
@@ -113,10 +114,8 @@ void Game::MakeFireBall()
 		v.y = -1;
 	}
 	ball.SetDirection(v);
-	if (countB == 0)
+	if (countB == 0)		//the first ball
 	{
-		delete[] balls;
-
 		balls = new EnergyBall*[countB + 1];
 		balls[countB] = new EnergyBall;
 		*balls[countB] = ball;			
@@ -157,13 +156,14 @@ void Game::DestroyFireBalls(Rect<int> border)
 	{
 		if (balls[i] != nullptr)
 		{
-			bool col = balls[i]->GetRect().IsColliding(border);
+			bool col = balls[i]->GetRect().IsColliding(border);		//checks if the ball is in bounds 
 			if (!col)
 			{
+				//delete the ball
 				delete balls[i];
 				balls[i] = nullptr;
-				balls[i] = balls[countB-1];
-				countB--;
+				balls[i] = balls[countB-1];			//move the deleted 
+				countB--;							
 			}
 		}
 	}
@@ -215,5 +215,3 @@ Vec2 Game::GetBallMatchingPos()
 	
 	return vtr;
 }
-
-

@@ -16,7 +16,7 @@ public:
 	EnergyBall() = default;
 	EnergyBall& operator=(EnergyBall& b) = default;
 	void Draw(Graphics& gfx);
-	void Update();
+	void Update(float dt);
 	void SetDirection(const Vec2& v);
 	int GetWidth();
 	int GetHeight();

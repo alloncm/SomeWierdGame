@@ -17,9 +17,9 @@ void EnergyBall::Draw(Graphics & gfx)
 	gfx.DrawSprite((int)pos.x, (int)pos.y, sprite,SpriteEffects::Chroma(Colors::Magenta));
 }
 
-void EnergyBall::Update()
+void EnergyBall::Update(float dt)
 {
-	pos += direc;
+	pos += direc*dt;
 }
 
 void EnergyBall::SetDirection(const Vec2 & v)
