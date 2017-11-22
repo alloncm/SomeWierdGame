@@ -6,7 +6,7 @@ class D2Character
 {
 public:
 	D2Character() = default;
-	D2Character(std::string source, float speed, Vec2 position, Vec2 vel,Color bg,int width,int height);
+	D2Character(std::string source, float speed, Vec2 position, Vec2 vel,Color bg,int width = 0,int height = 0);
 	D2Character& operator=(D2Character& b) = default;
 	virtual void Draw(Graphics& gfx);
 	virtual void Update(float dt);

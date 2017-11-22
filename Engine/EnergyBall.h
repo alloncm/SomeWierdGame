@@ -2,24 +2,15 @@
 #include "Surface.h"
 #include"Graphics.h"
 #include "Effects.h"
-
-class EnergyBall
+#include "2DCharacter.h"
+class EnergyBall : public D2Character
 {
 private:
-	Surface sprite;
-	Vec2 pos;
-	Vec2 vel;
-	float speed;
 	Vec2 direc;
 public:
 	EnergyBall(std::string source,float speed,Vec2 position,Vec2 dir);
 	EnergyBall() = default;
 	EnergyBall& operator=(EnergyBall& b) = default;
-	void Draw(Graphics& gfx);
-	void Update(float dt);
-	void SetDirection(const Vec2& v);
-	int GetWidth();
-	int GetHeight();
-	const Rect<int> GetRect()const;
-	void SetLocation(const Vec2& p);
+	virtual void SetDirection(const Vec2& v);
+	virtual void Update(float dt);
 };

@@ -10,6 +10,14 @@ D2Character::D2Character(std::string source, float speed, Vec2 position, Vec2 ve
 	width(w),
 	height(h)
 {
+	if (w == 0)
+	{
+		width = sprite.GetWidth();
+	}
+	if (h == 0)
+	{
+		height = sprite.GetHeight();
+	}
 }
 
 void D2Character::Draw(Graphics & gfx)
