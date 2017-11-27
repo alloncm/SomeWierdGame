@@ -26,7 +26,7 @@
 #include"FrameTime.h"
 #include"Character.h"
 #include"Font.h"
-#include"DemoCharacter.h"
+#include"Player.h"
 #include"EnergyBall.h"
 class Game
 {
@@ -50,11 +50,12 @@ private:
 	/********************************/
 	/*  User Variables              */
 	Character link;
-	DemoCharacter cha;
+	EnergyBall ball;
+	Player cha;
 	FrameTimer ft;
 	FrameTimer ftB;
 	Font f;
-	EnergyBall ball;
+	
 	EnergyBall** balls;
 	int countB;
 	DemoCharacter bGuy;

@@ -27,7 +27,7 @@ Game::Game(MainWindow& wnd)
 	gfx(wnd),
 	link({ 100,100 }, 170, 90, 90),
 	f("Consolas13x24.bmp"),
-	cha("knightTest32x48.bmp", 100.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f),
+	cha( 100.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f,ball),
 	ball("energy18x18.bmp", 250, { 200,200 }, { 1,0 }),
 	bGuy("badGuy32x48.bmp", 100.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f),
 	countB(0)
@@ -45,7 +45,6 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	DestroyFireBalls({ { 100,100 },{ gfx.ScreenWidth - 100,gfx.ScreenHeight - 100 } });
 	Vec2 dir(0.0f,0.0f);
 	if (wnd.kbd.KeyIsPressed(VK_LEFT))
 	{
@@ -67,18 +66,11 @@ void Game::UpdateModel()
 	Keyboard::Event e = wnd.kbd.ReadKey();
 	if ( e.GetCode() == VK_SPACE && e.IsPress() )
 	{
-		MakeFireBall();
+		cha.FireBall();
 	}
 	cha.SetDirection(dir);
-	cha.Update(ft.Mark());
-	float dt = ftB.Mark();
-	for (int i = 0; i < countB; i++)
-	{
-		if (balls[i] != nullptr)
-		{
-			balls[i]->Update(dt);
-		}
-	}
+	cha.Update(ft.Mark(), { { 100,100 },{ gfx.ScreenWidth - 100,gfx.ScreenHeight - 100 } });
+	
 	
 }
 
@@ -172,8 +164,6 @@ void Game::DestroyFireBalls(Rect<int> border)
 		}
 	}
 }
-
-
 
 Vec2 Game::GetBallMatchingPos()
 {

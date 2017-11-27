@@ -10,7 +10,7 @@ public:
 	virtual void Update(float dt)override;
 	virtual void SetDirection(const Vec2& dir)override;
 	const Vec2 GetDirection() const;
-private:
+protected:
 	enum class State
 	{
 		WalkDown,
@@ -23,7 +23,7 @@ private:
 		StandUp,
 		Count
 	};
-private:
+protected:
 	std::vector<Animation>animations;
 	State iCurState;
 };
