@@ -1,10 +1,11 @@
 #include "Player.h"
 
-Player::Player(float spe, Vec2 p, int w, int h, Vec2_<int> searchStart, int animLong, float ht,EnergyBall b)
+Player::Player(float spe, Vec2 p, int w, int h, Vec2_<int> searchStart, int animLong, float ht,EnergyBall& b)
 	:
-	DemoCharacter(SourceFile, spe, p, w, h, searchStart, animLong, ht)
+	DemoCharacter(FileNames::hero, spe, p, w, h, searchStart, animLong, ht)
 {
 	ball = b;
+	balls = nullptr;
 }
 
 void Player::FireBall()
@@ -93,6 +94,15 @@ void Player::Update(float dt, Rect<int> border)
 	for (int i = 0; i < countB; i++)
 	{
 		balls[i]->Update(bdt);
+	}
+}
+
+void Player::Draw(Graphics & gfx)
+{
+	DemoCharacter::Draw(gfx);
+	for (int i = 0; i < countB; i++)
+	{
+		balls[i]->Draw(gfx);
 	}
 }
 

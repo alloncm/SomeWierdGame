@@ -25,14 +25,10 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	link({ 100,100 }, 170, 90, 90),
-	f("Consolas13x24.bmp"),
 	cha( 100.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f,ball),
 	ball("energy18x18.bmp", 250, { 200,200 }, { 1,0 }),
-	bGuy("badGuy32x48.bmp", 100.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f),
-	countB(0)
+	bGuy("badGuy32x48.bmp", 100.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f)
 {
-	balls = nullptr;
 }
 
 void Game::Go()
@@ -66,146 +62,15 @@ void Game::UpdateModel()
 	Keyboard::Event e = wnd.kbd.ReadKey();
 	if ( e.GetCode() == VK_SPACE && e.IsPress() )
 	{
-		cha.FireBall();
+		cha.FireBall();		
 	}
 	cha.SetDirection(dir);
 	cha.Update(ft.Mark(), { { 100,100 },{ gfx.ScreenWidth - 100,gfx.ScreenHeight - 100 } });
-	
 	
 }
 
 void Game::ComposeFrame()
 {
 	cha.Draw(gfx);
-	bGuy.Draw(gfx);
-	for (int i = 0; i < countB; i++)
-	{
-		if (balls[i] != nullptr)
-		{
-			balls[i]->Draw(gfx);
-		}
-	}
 }
 
-void Game::MakeFireBall()
-{
-	Vec2 v = cha.GetDirection();		//sets the position of the ball to match the character
-	
-	ball.SetLocation(GetBallMatchingPos());
-	//updates the directoio of the ball based on the velocity of the caracter
-	if (v.x > 1)
-	{
-		v.x = 1;
-	}
-	if (v.y > 1)
-	{
-		v.y = 1;
-	}
-	if (v.x < -1)
-	{
-		v.x = -1;
-	}
-	if (v.y < -1)
-	{
-		v.y = -1;
-	}
-	ball.SetDirection(v);
-	if (countB == 0)		//the first ball
-	{
-		balls = new EnergyBall*[countB + 1];
-		balls[countB] = new EnergyBall;
-		*balls[countB] = ball;			
-		countB++;
-	}
-	else
-	{
-		int j = 0;								//counts the number of elements in balls
-		EnergyBall** temp = new EnergyBall* [countB + 1];		//temporary place to copy only the valid elemets 
-		for (int i = 0; i < countB; i++)
-		{
-			if (balls[i] != nullptr)		//copies only if not nullptr
-			{
-				temp[j] = balls[i];
-				balls[i] = nullptr;
-				j++;						//keep track of how many copied
-			}
-		}                
-		delete[] balls;
-		balls = new EnergyBall* [j+1];		//realocate the memory 
-		for (int i = 0; i < j; i++)			//copies the loctions of the values to the new alocated memory
-		{
-			balls[i] = temp[i];
-			temp[i] = nullptr;
-		}
-		delete[] temp;
-		temp = nullptr;
-		countB = j;
-		balls[countB] = new EnergyBall;			//alocate memory for another element
-		*balls[countB] = ball;					
-		countB++;
-	}
-}
-
-void Game::DestroyFireBalls(Rect<int> border)
-{
-	for (int i = 0; i < countB; i++)
-	{
-		if (balls[i] != nullptr)
-		{
-			bool col = balls[i]->GetRect().IsColliding(border);		//checks if the ball is in bounds 
-			if (!col)
-			{
-				//delete the ball
-				delete balls[i];
-				balls[i] = nullptr;
-				balls[i] = balls[countB-1];			//move the deleted 
-				countB--;							
-			}
-		}
-	}
-}
-
-Vec2 Game::GetBallMatchingPos()
-{
-	Vec2 vtr = cha.GetPosition();
-	
-	Vec2 v = cha.GetDirection();
-	//make sure v values are 1 or 0
-	if (v.x > 0 && v.x < 1)
-	{
-		v.x = 1;
-	}
-	else if (v.x < 0 && v.x > -1)
-	{
-		v.x = -1;
-	}
-	if (v.y > 0 && v.y < 1)
-	{
-		v.y = 1;
-	}
-	else if (v.y < 0 && v.y > -1)
-	{
-		v.y = -1;
-	}
-	Vec2_<int> p ((int)v.x,(int)v.y);
-	if (p.x == 1)	//looking right
-	{
-		vtr.x += cha.GetWidth();
-	}
-	if (p.x == -1)	//looking left
-	{
-		vtr.x -= ball.GetWidth();
-	}
-	if (p.x == 0 && p.y == -1)	//looking up
-	{
-		vtr.x += ((cha.GetWidth() / 2) - (ball.GetWidth() / 2));
-		vtr.y -= ball.GetHeight();
-	}
-	if (p.x == 0 && p.y == 1)	//looking down
-	{
-		vtr.x += ((cha.GetWidth() / 2) - (ball.GetWidth() / 2));
-		vtr.y += cha.GetHeight();
-	}
-	
-	return vtr;
-}

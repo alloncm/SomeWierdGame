@@ -49,15 +49,9 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
-	Character link;
 	EnergyBall ball;
 	Player cha;
 	FrameTimer ft;
-	FrameTimer ftB;
-	Font f;
-	
-	EnergyBall** balls;
-	int countB;
 	DemoCharacter bGuy;
 	/********************************/
 };
