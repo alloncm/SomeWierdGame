@@ -74,7 +74,10 @@ public:
 	}
 	Vec2_<T>& Normalize()
 	{
-		*this /= GetLength();
+		if (GetLength() != 0)
+		{
+			*this /= GetLength();
+		}
 		return *this;
 	}
 };

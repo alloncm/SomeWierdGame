@@ -147,6 +147,7 @@
     <ClInclude Include="Effects.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnergyBall.h" />
+    <ClInclude Include="FileNames.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FrameTime.h" />
     <ClInclude Include="Game.h" />

@@ -28,6 +28,7 @@
 #include"Font.h"
 #include"Player.h"
 #include"EnergyBall.h"
+#include"Enemy.h"
 class Game
 {
 public:
@@ -40,9 +41,7 @@ private:
 	void UpdateModel();
 	/********************************/
 	/*  User Functions              */
-	void MakeFireBall();
-	void DestroyFireBalls(Rect<int> border);
-	Vec2 GetBallMatchingPos();
+	
 	/********************************/
 private:
 	MainWindow& wnd;
@@ -52,6 +51,7 @@ private:
 	EnergyBall ball;
 	Player cha;
 	FrameTimer ft;
-	DemoCharacter bGuy;
+	Enemy enemy;
+	FrameTimer eft;
 	/********************************/
 };

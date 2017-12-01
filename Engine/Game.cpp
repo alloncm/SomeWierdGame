@@ -27,7 +27,7 @@ Game::Game(MainWindow& wnd)
 	gfx(wnd),
 	cha( 100.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f,ball),
 	ball("energy18x18.bmp", 250, { 200,200 }, { 1,0 }),
-	bGuy("badGuy32x48.bmp", 100.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f)
+	enemy(25.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f)
 {
 }
 
@@ -66,11 +66,12 @@ void Game::UpdateModel()
 	}
 	cha.SetDirection(dir);
 	cha.Update(ft.Mark(), { { 100,100 },{ gfx.ScreenWidth - 100,gfx.ScreenHeight - 100 } });
-	
+	enemy.Update(eft.Mark(),&cha);
 }
 
 void Game::ComposeFrame()
 {
 	cha.Draw(gfx);
+	enemy.Draw(gfx);
 }
 
