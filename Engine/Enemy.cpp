@@ -21,3 +21,13 @@ void Enemy::Update(float dt, D2Character* dc)
 	DemoCharacter::Update(dt);
 }
 
+void Enemy::SetDirection(const Vec2 & dir)
+{
+	DemoCharacter::SetDirection(dir);
+	//finish this up so the enemy will walk up and down too
+	if (dir.y > 0 && dir.y > dir.x)
+	{
+		iCurState = State::WalkDown;
+	}
+}
+

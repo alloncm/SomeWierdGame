@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DemoCharacter">
+    <Position X="7.25" Y="4" Width="3.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="DemoCharacter::State" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>DemoCharacter.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAIAgAAEACAAAAAAAAAEAAAAACAAAAAAAA=</HashCode>
+      <FileName>DemoCharacter.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="D2Character">
+    <Position X="7.25" Y="0.5" Width="3" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQBIAAAACAAAgQAQCAAAIBAIBAAAQAgAACgAEAAAAA=</HashCode>
+      <FileName>2DCharacter.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Enemy">
+    <Position X="10.5" Y="7.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAgAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enemy.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player">
+    <Position X="4.25" Y="5.75" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQAgAAAAAAAAgEABAAAAAQQAAAAAAAAAAEAAQAAIAA=</HashCode>
+      <FileName>Player.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnergyBall">
+    <Position X="12.75" Y="2" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAACACgAAAAAgA=</HashCode>
+      <FileName>EnergyBall.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -5,6 +5,7 @@ Player::Player(float spe, Vec2 p, int w, int h, Vec2_<int> searchStart, int anim
 	DemoCharacter(FileNames::hero, spe, p, w, h, searchStart, animLong, ht)
 {
 	ball = b;
+	countB = 0;
 	balls = nullptr;
 }
 
