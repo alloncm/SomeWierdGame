@@ -1,6 +1,7 @@
 #pragma once
 #include"DemoCharacter.h"
 #include"FileNames.h"
+#include<cmath>
 class Enemy : public DemoCharacter
 {
 public:

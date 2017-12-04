@@ -25,9 +25,18 @@ void Enemy::SetDirection(const Vec2 & dir)
 {
 	DemoCharacter::SetDirection(dir);
 	//finish this up so the enemy will walk up and down too
-	if (dir.y > 0 && dir.y > dir.x)
+	float x = std::abs(dir.x);
+	float y = std::abs(dir.y);
+	if (y>x)
 	{
-		iCurState = State::WalkDown;
+		if (dir.y < 0)
+		{
+			iCurState = State::WalkUp;
+		}
+		else
+		{
+			iCurState = State::WalkDown;
+		}
 	}
 }
 
