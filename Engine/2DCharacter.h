@@ -16,6 +16,7 @@ public:
 	const Rect<int> GetRect()const;
 	void SetLocation(const Vec2& p);
 	const Vec2& GetPosition()const;
+	virtual ~D2Character() = default;
 
 protected:
 	Surface sprite;

@@ -26,7 +26,7 @@ Game::Game(MainWindow& wnd)
 	wnd(wnd),
 	gfx(wnd),
 	cha( 100.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f,ball),
-	ball("energy18x18.bmp", 250, { 200,200 }, { 1,0 }),
+	ball( 250, { 200,200 }, { 1,0 }),
 	enemy(25.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f)
 {
 }

@@ -68,10 +68,12 @@ public:
 		y /= v;
 		return *this;
 	}
-	float GetLength()
+
+	float GetLength() const
 	{
 		return sqrt(x*x + y*y);
 	}
+
 	Vec2_<T>& Normalize()
 	{
 		if (GetLength() != 0)
@@ -79,6 +81,14 @@ public:
 			*this /= GetLength();
 		}
 		return *this;
+	}
+
+	float Distance(const Vec2_<T>& v) const
+	{
+		T x = std::abs(this->x - v.x);
+		T y = std::abs(this->y - v.y);
+		Vec2_<T> vec(x, y);
+		return vec.GetLength();
 	}
 };
 

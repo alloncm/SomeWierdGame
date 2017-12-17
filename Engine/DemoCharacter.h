@@ -10,6 +10,7 @@ public:
 	virtual void Update(float dt)override;
 	virtual void SetDirection(const Vec2& dir)override;
 	const Vec2 GetDirection() const;
+	virtual ~DemoCharacter() = default;
 protected:
 	enum class State
 	{

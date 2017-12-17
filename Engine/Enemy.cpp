@@ -8,10 +8,13 @@ Enemy::Enemy(float spe, Vec2 p, int w, int h, Vec2_<int> searchStart, int animLo
 
 Vec2 Enemy::MoveEnemy(D2Character* dc)
 {
-	Vec2 dir = dc->GetPosition();
-	dir -= this->GetPosition();
-	vel = dir.Normalize()*speed;
-
+	Vec2 dir(0, 0);
+	if (this->pos.Distance(dc->GetPosition()) > dc->GetWidth()/2)
+	{
+		 dir = dc->GetPosition();
+		dir -= this->GetPosition();
+		vel = dir.Normalize()*speed;
+	}
 	return dir;
 }
 
@@ -24,7 +27,6 @@ void Enemy::Update(float dt, D2Character* dc)
 void Enemy::SetDirection(const Vec2 & dir)
 {
 	DemoCharacter::SetDirection(dir);
-	//finish this up so the enemy will walk up and down too
 	float x = std::abs(dir.x);
 	float y = std::abs(dir.y);
 	if (y>x)
@@ -38,5 +40,6 @@ void Enemy::SetDirection(const Vec2 & dir)
 			iCurState = State::WalkDown;
 		}
 	}
+	vel = dir*speed;
 }
 
