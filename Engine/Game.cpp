@@ -71,7 +71,8 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-	cha.Draw(gfx);
 	enemy.Draw(gfx);
+	cha.Draw(gfx);
+	
 }
 

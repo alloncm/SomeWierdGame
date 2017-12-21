@@ -25,7 +25,8 @@ void DemoCharacter::Update(float dt)
 
 void DemoCharacter::SetDirection(const Vec2 & dir)
 {
-				//check this the character wont stop the animation
+	vel = dir*speed;
+		//check this the character wont stop the animation
 	if (dir.x < 0)
 	{
 		iCurState = State::WalkLeft;
@@ -55,7 +56,7 @@ void DemoCharacter::SetDirection(const Vec2 & dir)
 				iCurState = State::StandUp;
 			}
 		}
-		else
+		else if(vel.x>vel.y)
 		{
 			if (vel.x < 0)
 			{
@@ -66,10 +67,18 @@ void DemoCharacter::SetDirection(const Vec2 & dir)
 				iCurState = State::StandRight;
 			}
 		}
-		//find solution to do in case vel ==(0,0)
+		else
+		{
+			int state = int(iCurState);
+			if ( state%2==0)
+			{
+				iCurState = static_cast<State>(state+1);
+			}
+		}
+		
 		
 	}
-	vel = dir*speed;
+	
 }
 
 const Vec2  DemoCharacter::GetDirection() const
