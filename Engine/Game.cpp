@@ -25,9 +25,10 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	cha( 100.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f,ball),
-	ball( 250, { 200,200 }, { 1,0 }),
-	enemy(25.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f)
+	cha(100.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f, ball),
+	ball(250, { 200,200 }, { 1,0 }),
+	enemy(25.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f),
+	obs("rock1.bmp", { 100,100 }, Colors::Magenta, 48, 48)
 {
 }
 
@@ -71,7 +72,8 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-	enemy.Draw(gfx);
+	//enemy.Draw(gfx);
+	obs.Draw(gfx);
 	cha.Draw(gfx);
 	
 }

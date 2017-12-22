@@ -24,14 +24,14 @@ public:
 
 	Rect()=default;
 
-	Rect(Rect& r) = default;
+	Rect(const Rect& r) = default;
 
 	Rect(T width, T height, Vec2_<T> center)
 		:
 		tLeft({ center.x - width / 2,center.y - height / 2 }),
 		bRight({ center.x + width / 2,center.y + height / 2 })
 	{}
-	Rect& operator=(Rect<T>& r)
+	Rect& operator=(const Rect<T>& r)
 	{
 		this->tLeft = r.tLeft;
 		this->bRight = r.bRight;
@@ -67,22 +67,22 @@ public:
 	{
 		bool sideInside = false;
 		bool baseInside = false;
-		if (tLeft.x > l.tLeft.x&&tLeft.x < l.bRight.x)
+		if (tLeft.x >= l.tLeft.x&&tLeft.x <= l.bRight.x)
 			//left side is inside
 		{
 			sideInside = true;
 		}
-		if (bRight.x < l.bRight.x&&bRight.x > l.tLeft.x)
+		if (bRight.x <= l.bRight.x&&bRight.x >= l.tLeft.x)
 			//right side is inside
 		{
 			sideInside = true;
 		}
-		if (tLeft.y > l.tLeft.y&&tLeft.y < l.bRight.y)
+		if (tLeft.y >= l.tLeft.y&&tLeft.y <= l.bRight.y)
 			//up side is inside
 		{
 			baseInside = true;
 		}
-		if (bRight.y < l.bRight.y&&bRight.y > l.tLeft.y)
+		if (bRight.y <= l.bRight.y&&bRight.y >= l.tLeft.y)
 			//bottom side is inside
 		{
 			baseInside = true;

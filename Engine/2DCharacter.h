@@ -5,8 +5,6 @@
 class D2Character
 {
 public:
-	D2Character() = default;
-	D2Character(std::string source, float speed, Vec2 position, Vec2 vel,Color bg,int width = 0,int height = 0);
 	D2Character& operator=(D2Character& b) = default;
 	virtual void Draw(Graphics& gfx);
 	virtual void Update(float dt);
@@ -17,7 +15,9 @@ public:
 	void SetLocation(const Vec2& p);
 	const Vec2& GetPosition()const;
 	virtual ~D2Character() = default;
-
+protected:
+	D2Character() = default;
+	D2Character(std::string source, float speed, Vec2 position, Vec2 vel, Color bg, int width = 0, int height = 0);
 protected:
 	Surface sprite;
 	Vec2 pos;
