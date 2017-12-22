@@ -28,7 +28,8 @@ Game::Game(MainWindow& wnd)
 	cha(100.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f, ball),
 	ball(250, { 200,200 }, { 1,0 }),
 	enemy(25.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f),
-	obs("rock1.bmp", { 100,100 }, Colors::Magenta, 48, 48)
+	obs("rock1.bmp", { 100,100 }, Colors::Magenta, 48, 48),
+	l(cha, "grassLevelCheck.bmp")
 {
 }
 
@@ -42,6 +43,7 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	/*
 	Vec2 dir(0.0f, 0.0f);
 	
 	if (wnd.kbd.KeyIsPressed(VK_LEFT))
@@ -69,13 +71,14 @@ void Game::UpdateModel()
 	cha.SetDirection(dir);
 	cha.Update(ft.Mark(), { { 100,100 },{ gfx.ScreenWidth - 100,gfx.ScreenHeight - 100 } });
 	enemy.Update(eft.Mark(),&cha);
+	*/
 }
 
 void Game::ComposeFrame()
 {
 	//enemy.Draw(gfx);
-	obs.Draw(gfx);
-	cha.Draw(gfx);
+	//obs.Draw(gfx);
+	//cha.Draw(gfx);
 	
 }
 

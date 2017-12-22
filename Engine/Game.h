@@ -30,6 +30,7 @@
 #include"EnergyBall.h"
 #include"Enemy.h"
 #include"Obs.h"
+#include"Level.h"
 class Game
 {
 public:
@@ -55,5 +56,6 @@ private:
 	Enemy enemy;
 	FrameTimer eft;
 	Obs obs;
+	Level l;
 	/********************************/
 };
