@@ -25,7 +25,9 @@ void DemoCharacter::Update(float dt)
 
 void DemoCharacter::SetDirection(const Vec2 & dir)
 {
-	vel = dir*speed;
+	Vec2 d = dir;
+	d.Normalize();
+	vel = d*speed;
 		//check this the character wont stop the animation
 	if (dir.x < 0)
 	{
