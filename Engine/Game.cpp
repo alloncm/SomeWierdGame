@@ -29,7 +29,7 @@ Game::Game(MainWindow& wnd)
 	ball(250, { 200,200 }, { 1,0 }),
 	enemy(25.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f),
 	obs("rock1.bmp", { 100,100 }, Colors::Magenta, 48, 48),
-	l(cha, "grassLevelCheck.bmp")
+	l("grassLevelCheck.bmp",&cha)
 {
 }
 
@@ -79,6 +79,6 @@ void Game::ComposeFrame()
 	//enemy.Draw(gfx);
 	//obs.Draw(gfx);
 	//cha.Draw(gfx);
-	
+	l.Draw(gfx);
 }
 

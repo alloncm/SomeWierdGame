@@ -7,11 +7,12 @@
 class Level
 {
 public:
-	Level(Player p, std::string bg);
+	Level() = default;
+	Level(std::string bg,Player* p);
 	//Level(Player p, std::vector<Obs> o, Surface background);
 	void Draw(Graphics& gfx);
 protected:
-	Player hero;
-	std::vector<Obs> Obstacles;
+	Player* hero;
+	//std::vector<Obs> Obstacles;
 	Surface backGround;
 };

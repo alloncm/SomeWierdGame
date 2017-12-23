@@ -12,7 +12,7 @@ public:
 	void DestroyFireBall(Rect<int>Border);
 	void Update(float dt, Rect<int>border);
 	virtual void Draw(Graphics& gfx)override;
-	virtual ~Player() = default;
+	virtual ~Player();
 private:
 	Vec2 GetBallMatchingPosition();
 protected:

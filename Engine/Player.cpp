@@ -107,6 +107,15 @@ void Player::Draw(Graphics & gfx)
 	}
 }
 
+Player::~Player()
+{
+	for (int i = 0; i < countB; i++)
+	{
+		delete balls[i];
+	}
+	delete balls;
+}
+
 Vec2 Player::GetBallMatchingPosition()
 {
 	Vec2 vtr = GetPosition();
