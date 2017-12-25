@@ -1,6 +1,6 @@
 #include "DemoCharacter.h"
 
-DemoCharacter::DemoCharacter(std::string s, float spe, Vec2 p, int w, int h, Vec2_<int> searchStart,int animLong,float ht)
+DemoCharacter::DemoCharacter(std::string s, float spe, Vec2 p, int w, int h, Vec2_<int> searchStart,int animLong,float ht,int live)
 	:
 	D2Character(s,spe,p,{0,0},Colors::Magenta,w,h),
 	iCurState(State::StandDown)
@@ -83,7 +83,7 @@ void DemoCharacter::SetDirection(const Vec2 & dir)
 	
 }
 
-const Vec2  DemoCharacter::GetDirection() const
+const Vec2& DemoCharacter::GetDirection() const
 {
 	Vec2 dir = { 0.0,0.0 };
 	if (vel != dir)

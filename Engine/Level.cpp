@@ -1,19 +1,24 @@
 #include "Level.h"
 
-Level::Level( std::string bg,Player* p)
+Level::Level(Player* p,Graphics& g)
 	:
-	backGround(bg)
+	gfx(&g)
 {
 	hero = p;
 }
 
-void Level::Draw(Graphics & gfx)
+void Level::Draw()
 {
-	
-	gfx.DrawSprite(0, 0, backGround, [this](Color cSrc, int xDest, int yDest, Graphics& gfx) {
-		gfx.PutPixel(xDest, yDest,
-		{ cSrc.GetR(),cSrc.GetG(), cSrc.GetB() }
-		);
-	});
-	hero->Draw(gfx);
+	hero->Draw(*gfx);
+}
+
+void Level::Update(const Vec2& dir,bool fire)
+{
+	float timer = ft.Mark();
+	hero->Update(timer, gfx->GetScreenRect());
+	hero->SetDirection(dir);
+	if (fire)
+	{
+		hero->FireBall();
+	}
 }

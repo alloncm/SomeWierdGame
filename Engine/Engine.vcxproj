@@ -162,6 +162,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Surface.h" />
     <ClInclude Include="Vec2.h" />
+    <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2DCharacter.cpp" />

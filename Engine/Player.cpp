@@ -2,7 +2,7 @@
 
 Player::Player(float spe, Vec2 p, int w, int h, Vec2_<int> searchStart, int animLong, float ht,EnergyBall& b)
 	:
-	DemoCharacter(FileNames::hero, spe, p, w, h, searchStart, animLong, ht)
+	DemoCharacter(FileNames::hero, spe, p, w, h, searchStart, animLong, ht,lives)
 {
 	ball = b;
 	countB = 0;

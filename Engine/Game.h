@@ -38,6 +38,7 @@ public:
 	Game( const Game& ) = delete;
 	Game& operator=( const Game& ) = delete;
 	void Go();
+	~Game();
 private:
 	void ComposeFrame();
 	void UpdateModel();
@@ -56,6 +57,6 @@ private:
 	Enemy enemy;
 	FrameTimer eft;
 	Obs obs;
-	Level l;
+	Level demoLevel;
 	/********************************/
 };

@@ -1,8 +1,8 @@
 #include "Enemy.h"
 
-Enemy::Enemy(float spe, Vec2 p, int w, int h, Vec2_<int> searchStart, int animLong, float ht)
+Enemy::Enemy(float spe, Vec2 p, int w, int h, Vec2_<int> searchStart, int animLong, float ht,int live)
 	:
-	DemoCharacter(FileNames::enemy,spe,p,w,h,searchStart,animLong,ht)
+	DemoCharacter(FileNames::enemy,spe,p,w,h,searchStart,animLong,ht,live)
 {
 }
 

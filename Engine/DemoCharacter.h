@@ -5,11 +5,11 @@
 class DemoCharacter : public D2Character
 {
 public:
-	DemoCharacter(std::string s, float spe, Vec2 p, int w, int h, Vec2_<int> searchStart,int animLong,float ht);
+	DemoCharacter(std::string s, float spe, Vec2 p, int w, int h, Vec2_<int> searchStart, int animLong, float ht, int live = 1);
 	virtual void Draw(Graphics& gfx)override;
 	virtual void Update(float dt)override;
 	virtual void SetDirection(const Vec2& dir)override;
-	const Vec2 GetDirection() const;
+	const Vec2& GetDirection() const;
 	virtual ~DemoCharacter() = default;
 protected:
 	enum class State
@@ -27,4 +27,5 @@ protected:
 protected:
 	std::vector<Animation>animations;
 	State iCurState;
+	int live;
 };
