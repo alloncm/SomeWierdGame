@@ -1,6 +1,8 @@
 #pragma once
 #include<cmath>
 
+
+//template 2d vector 
 template<typename T>
 class Vec2_
 {

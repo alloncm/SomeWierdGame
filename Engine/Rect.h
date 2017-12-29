@@ -2,6 +2,7 @@
 
 #include"Vec2.h"
 
+//template class rect
 template<typename T>
 class Rect
 {

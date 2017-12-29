@@ -2,6 +2,8 @@
 #include"DemoCharacter.h"
 #include"FileNames.h"
 #include<cmath>
+
+//a class to hold an enemy
 class Enemy : public DemoCharacter
 {
 public:

@@ -6,10 +6,8 @@
 #include"FileNames.h"
 class EnergyBall : public D2Character
 {
-private:
-	Vec2 direc;
 public:
-	EnergyBall(float speed,Vec2 position,Vec2 dir);
+	EnergyBall(float speed,Vec2 position,Vec2 dir);	
 	EnergyBall() = default;
 	EnergyBall& operator=(EnergyBall& b) = default;
 	virtual void SetDirection(const Vec2& v) override;

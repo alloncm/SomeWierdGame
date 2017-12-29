@@ -3,6 +3,8 @@
 #include"Surface.h"
 #include"Vec2.h"
 #include"Graphics.h"
+
+//class to represent a font in the game
 class Font
 {
 public:

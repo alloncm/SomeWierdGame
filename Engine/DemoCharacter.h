@@ -12,6 +12,7 @@ public:
 	const Vec2& GetDirection() const;
 	virtual ~DemoCharacter() = default;
 protected:
+	//an enum class to hold the state of the character
 	enum class State
 	{
 		WalkDown,
@@ -25,7 +26,7 @@ protected:
 		Count
 	};
 protected:
-	std::vector<Animation>animations;
-	State iCurState;
-	int live;
+	std::vector<Animation>animations;		//holds all the animations to the character
+	State iCurState;						//the current state of the animation of the character
+	int live;								//counts the lives of the character
 };

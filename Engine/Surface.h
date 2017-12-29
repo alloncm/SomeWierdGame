@@ -4,6 +4,8 @@
 #include"ChiliWin.h"
 #include<fstream>
 #include"Rect.h"
+
+//repsresent an image loaded from .bmp file
 class Surface
 {
 public:

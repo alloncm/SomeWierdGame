@@ -2,6 +2,8 @@
 #include"Colors.h"
 #include"Graphics.h"
 
+
+//namespace to hold all the sprite effects
 namespace SpriteEffects
 {
 	class Chroma
