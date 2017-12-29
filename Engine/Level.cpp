@@ -25,6 +25,7 @@ void Level::Update(const Vec2& dir,bool fire)
 {
 	float timer = ft.Mark();
 	//problem with the copy constructor of Player needs to check again about copy constructor and assigment cause im a dumb shit
+	//pc takes up to 6gb which is new record
 	if (NextMoveValid(dir, *hero, timer))
 	{
 		hero->Update(timer, gfx->GetScreenRect());
