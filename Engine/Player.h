@@ -10,7 +10,6 @@ class Player : public DemoCharacter
 public:
 	Player(float spe, Vec2 p, int w, int h, Vec2_<int> searchStart, int animLong, float ht,EnergyBall& b);
 	void FireBall();							//fire an energy ball
-	
 	void Update(float dt, Rect<int>border);		//updates the player based on the border of the screen and destroys the balls out of the screen
 	virtual void Draw(Graphics& gfx)override;
 	virtual ~Player();

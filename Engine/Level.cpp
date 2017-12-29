@@ -26,10 +26,11 @@ void Level::Update(const Vec2& dir,bool fire)
 	float timer = ft.Mark();
 	//problem with the copy constructor of Player needs to check again about copy constructor and assigment cause im a dumb shit
 	//pc takes up to 6gb which is new record
-	if (NextMoveValid(dir, *hero, timer))
+	//try to get the next position of the player without changing it until i know its valid move
+	hero->SetDirection(dir);
+	if (NextMoveValid(dir, hero, timer))
 	{
 		hero->Update(timer, gfx->GetScreenRect());
-		hero->SetDirection(dir);
 	}
 	if (fire)
 	{
@@ -46,10 +47,9 @@ Level::~Level()
 	}
 }
 
-bool Level::NextMoveValid(const Vec2 & dir, Player copy,float mark)
+bool Level::NextMoveValid(const Vec2 & dir, Player* copy,float mark)
 {
-	copy.Update(mark, gfx->GetScreenRect());
-	copy.SetDirection(dir);
+	copy->
 	bool valid = true;
 	for (int i = 0; i < numObs; i++)
 	{

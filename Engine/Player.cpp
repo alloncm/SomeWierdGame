@@ -9,6 +9,7 @@ Player::Player(float spe, Vec2 p, int w, int h, Vec2_<int> searchStart, int anim
 	balls = nullptr;
 }
 
+
 void Player::FireBall()
 {
 	Vec2 v = GetDirection();		//sets the position of the ball to match the character

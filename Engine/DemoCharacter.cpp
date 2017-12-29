@@ -12,6 +12,7 @@ DemoCharacter::DemoCharacter(std::string s, float spe, Vec2 p, int w, int h, Vec
 	}
 }
 
+
 void DemoCharacter::Draw(Graphics & gfx)
 {
 	animations[(int)iCurState].Draw({ (int)pos.x, (int)pos.y }, gfx);

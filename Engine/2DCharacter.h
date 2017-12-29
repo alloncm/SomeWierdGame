@@ -20,6 +20,7 @@ public:
 protected:
 	D2Character() = default;
 	D2Character(std::string source, float speed, Vec2 position, Vec2 vel, Color bg, int width = 0, int height = 0);
+
 protected:
 	Surface sprite;			//the sprite used to draw the character
 	Vec2 pos;				//the position of the character
