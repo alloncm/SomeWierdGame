@@ -30,10 +30,7 @@ void Level::Update(const Vec2& dir,bool fire)
 	hero->SetDirection(dir);
 	Vec2 pos= hero->GetPosition();
 	pos += hero->GetUpdatedPosition(timer);
-	Vec2 rB = { pos.x + hero->GetWidth(),pos.y + hero->GetHeight() };
-	
-	Rect<int> heroRect;
-	heroRect = Rect::GetRectI(pos, rB);
+	Rect<int> heroRect(pos.x, pos.y, hero->GetWidth(), hero->GetHeight());
 	if (NextMoveValid(heroRect))
 	{
 		hero->Update(timer, gfx->GetScreenRect());
