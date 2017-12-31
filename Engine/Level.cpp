@@ -28,7 +28,13 @@ void Level::Update(const Vec2& dir,bool fire)
 	//pc takes up to 6gb which is new record
 	//try to get the next position of the player without changing it until i know its valid move
 	hero->SetDirection(dir);
-	if (NextMoveValid(dir, hero, timer))
+	Vec2 pos= hero->GetPosition();
+	pos += hero->GetUpdatedPosition(timer);
+	Vec2 rB = { pos.x + hero->GetWidth(),pos.y + hero->GetHeight() };
+	
+	Rect<int> heroRect;
+	heroRect = Rect::GetRectI(pos, rB);
+	if (NextMoveValid(heroRect))
 	{
 		hero->Update(timer, gfx->GetScreenRect());
 	}
@@ -47,13 +53,12 @@ Level::~Level()
 	}
 }
 
-bool Level::NextMoveValid(const Vec2 & dir, Player* copy,float mark)
+bool Level::NextMoveValid(Rect<int> hero)
 {
-	copy->
 	bool valid = true;
 	for (int i = 0; i < numObs; i++)
 	{
-		if (Obstacles[i]->IsColliding(&copy))
+		if (Obstacles[i]->IsColliding(hero))
 		{
 			valid = false;
 		}

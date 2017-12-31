@@ -16,7 +16,7 @@ public:
 	void Update(const Vec2& dir, bool Plyerfire);
 	virtual ~Level();
 private:
-	bool NextMoveValid(const Vec2& dir, Player* copy, float mark);
+	bool NextMoveValid( Rect<int> hero);
 protected:
 	Graphics* gfx;
 	Player* hero;

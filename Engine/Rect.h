@@ -90,5 +90,9 @@ public:
 		}
 		return baseInside && sideInside;
 	}
+	static Rect<int> GetRectI(Vec2_<T> v1, Vec2_<T> v2)
+	{
+		return RectI({ (int)v1.x,(int)v1.y }, { (int)v2.x,(int)v2.y});
+	}
 };
 typedef Rect<int> RectI;

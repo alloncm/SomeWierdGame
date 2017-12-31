@@ -13,14 +13,15 @@ public:
 	virtual void SetDirection(const Vec2& v) = 0;
 	int GetWidth()const;
 	int GetHeight()const;
-	const Rect<int> GetRect()const;
+	const Rect<int>& GetRect()const;
 	void SetLocation(const Vec2& p);
 	const Vec2& GetPosition()const;
+	Vec2 GetUpdatedPosition(float dt);
 	virtual ~D2Character() = default;
 protected:
 	D2Character() = default;
 	D2Character(std::string source, float speed, Vec2 position, Vec2 vel, Color bg, int width = 0, int height = 0);
-
+	
 protected:
 	Surface sprite;			//the sprite used to draw the character
 	Vec2 pos;				//the position of the character

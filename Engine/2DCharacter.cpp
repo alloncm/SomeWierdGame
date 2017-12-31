@@ -46,7 +46,7 @@ int D2Character::GetHeight() const
 	return height;
 }
 
-const Rect<int> D2Character::GetRect() const
+const Rect<int>& D2Character::GetRect() const
 {
 	return RectI({ (int)pos.x,(int)pos.y }, { (int)pos.x + width,(int)pos.y + height });
 }
@@ -60,4 +60,9 @@ void D2Character::SetLocation(const Vec2 & p)
 const Vec2 & D2Character::GetPosition() const
 {
 	return pos;
+}
+
+Vec2  D2Character::GetUpdatedPosition(float dt)
+{
+	return vel*dt;
 }

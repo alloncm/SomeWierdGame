@@ -7,10 +7,10 @@ Obs::Obs(std::string source, Vec2 position, Color bg, int width, int height, flo
 }
 
 
-bool Obs::IsColliding(D2Character * ch)
+bool Obs::IsColliding(const Rect<int>& r)
 {
 	const Rect<int> r1 = this->GetRect();
-	const Rect<int> r2 = ch->GetRect();
+	const Rect<int> r2 = r;
 	return r1.IsColliding(r2);
 }
 
