@@ -326,7 +326,7 @@ void Graphics::PutPixel( int x,int y,Color c )
 
 RectI Graphics::GetScreenRect() const
 {
-	return{{ 0,0 }, { ScreenWidth,ScreenHeight }};
+	return{{ 0,0 }, { ScreenWidth-1,ScreenHeight-1 }};
 }
 
 //////////////////////////////////////////////////

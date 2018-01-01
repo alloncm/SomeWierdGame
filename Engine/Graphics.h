@@ -77,7 +77,7 @@ public:
 
 	template<typename T>
 	void DrawSprite(int x, int y, RectI & src, RectI & clip, const Surface & s, T effect)
-	//draw the sprite and the effect only yhe paet src pionts to and only if the sprite is int he clip
+	//draw the sprite and the effect only the part src points to and only if the sprite is int he clip
 	{
 		//some assertion
 		
