@@ -85,7 +85,7 @@ void Player::DestroyFireBall(Rect<int>border)
 				countB--;
 			}
 		}
-	}
+ 	}
 }
 
 void Player::Update(float dt, Rect<int> border)

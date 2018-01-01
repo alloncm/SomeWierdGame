@@ -1,6 +1,7 @@
 #pragma once
 #include"Surface.h"
 #include"Graphics.h"
+#include"Effects.h"
 
 //an abstract class to represent all the 2d objects and charachters in the game
 
@@ -13,7 +14,7 @@ public:
 	virtual void SetDirection(const Vec2& v) = 0;
 	int GetWidth()const;
 	int GetHeight()const;
-	const Rect<int>& GetRect()const;
+	const Rect<int> GetRect()const;
 	void SetLocation(const Vec2& p);
 	const Vec2& GetPosition()const;
 	Vec2 GetUpdatedPosition(float dt);

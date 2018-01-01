@@ -66,19 +66,19 @@ public:
 	}
 	bool IsColliding(const Rect<T>& l)const
 	{
-		if (IsInside(l.tLeft))
+		if (IsInside(l.tLeft)||l.IsInside(tLeft))
 		{
 			return true;
 		}
-		if (IsInside(l.bRight))
+		if (IsInside(l.bRight)||l.IsInside(bRight))
 		{
 			return true;
 		}
-		if (IsInside({ l.tLeft.x,l.bRight.y }))
+		if (IsInside({ l.tLeft.x,l.bRight.y })||l.IsInside({ tLeft.x,bRight.y }))
 		{
 			return true;
 		}
-		if (IsInside({ l.bRight.x,l.tLeft.y }))
+		if (IsInside({ l.bRight.x,l.tLeft.y })||l.IsInside({ bRight.x,tLeft.y }))
 		{
 			return true;
 		}

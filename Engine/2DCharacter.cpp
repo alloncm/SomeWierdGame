@@ -23,12 +23,7 @@ D2Character::D2Character(std::string source, float speed, Vec2 position, Vec2 ve
 void D2Character::Draw(Graphics & gfx)
 {
 	Color c = backGround;
-	gfx.DrawSprite((int)pos.x, (int)pos.y, sprite, [ c ](Color src,int destX ,int destY,Graphics& gfx) {
-		if (src != c)
-		{
-			gfx.PutPixel(destX,destY,src);
-		}
-	});
+	gfx.DrawSprite((int)pos.x, (int)pos.y, sprite,SpriteEffects::Chroma(c));
 }
 
 void D2Character::Update(float dt)
@@ -46,7 +41,7 @@ int D2Character::GetHeight() const
 	return height;
 }
 
-const Rect<int>& D2Character::GetRect() const
+const Rect<int> D2Character::GetRect() const
 {
 	return RectI({ (int)pos.x,(int)pos.y }, { (int)pos.x + width,(int)pos.y + height });
 }
