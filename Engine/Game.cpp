@@ -47,7 +47,6 @@ Game::~Game()
 
 void Game::UpdateModel()
 {
-	
 	Vec2 dir(0.0f, 0.0f);
 	
 	if (wnd.kbd.KeyIsPressed(VK_LEFT))

@@ -58,7 +58,7 @@ public:
 	//not working as intend 
 	//needs to fix
 	{
-		if ((l.x > tLeft.x&&l.x < bRight.x) && (l.y > tLeft.y&&l.y < bRight.y))
+		if ((l.x >= tLeft.x&&l.x <= bRight.x) && (l.y >= tLeft.y&&l.y <= bRight.y))
 		{
 			return true;
 		}
@@ -66,29 +66,23 @@ public:
 	}
 	bool IsColliding(const Rect<T>& l)const
 	{
-		bool sideInside = false;
-		bool baseInside = false;
-		if (tLeft.x >= l.tLeft.x&&tLeft.x <= l.bRight.x)
-			//left side is inside
+		if (IsInside(l.tLeft))
 		{
-			sideInside = true;
+			return true;
 		}
-		if (bRight.x <= l.bRight.x&&bRight.x >= l.tLeft.x)
-			//right side is inside
+		if (IsInside(l.bRight))
 		{
-			sideInside = true;
+			return true;
 		}
-		if (tLeft.y >= l.tLeft.y&&tLeft.y <= l.bRight.y)
-			//up side is inside
+		if (IsInside({ l.tLeft.x,l.bRight.y }))
 		{
-			baseInside = true;
+			return true;
 		}
-		if (bRight.y <= l.bRight.y&&bRight.y >= l.tLeft.y)
-			//bottom side is inside
+		if (IsInside({ l.bRight.x,l.tLeft.y }))
 		{
-			baseInside = true;
+			return true;
 		}
-		return baseInside && sideInside;
+		return false;
 	}
 	static Rect<int> GetRectI(Vec2_<T> v1, Vec2_<T> v2)
 	{
