@@ -88,10 +88,25 @@ void Player::DestroyFireBall(Rect<int>border)
  	}
 }
 
-void Player::Update(float dt, Rect<int> border)
+void Player::Update(float dt, Rect<int> border, std::vector<D2Character*> obs)
 {
 	DemoCharacter::Update(dt);
 	DestroyFireBall(border);
+	while (!obs.empty())
+	{
+		D2Character* ob = obs.back();
+		for (int i = 0; i < countB; i++)
+		{
+			if (ob->IsColliding(balls[i]))
+			{
+				delete balls[i];
+				balls[i] = balls[countB - 1];
+				balls[countB - 1] = nullptr;
+				countB--;
+			}
+		}
+		obs.pop_back();
+	}
 	float bdt = ft.Mark();
 	for (int i = 0; i < countB; i++)
 	{

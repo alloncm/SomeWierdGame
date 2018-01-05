@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="DemoCharacter">
-    <Position X="7.25" Y="4" Width="3.25" />
+    <Position X="9" Y="4.75" Width="1.5" />
     <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
     <NestedTypes>
@@ -14,45 +13,49 @@
       </Enum>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAIAgAAEACAAAAAAAAAEAAAAACAAAAAAAA=</HashCode>
+      <HashCode>AAUAAAAAAAAIAgAAEACAAAAAAAAAEAEAAACAAAAAAAA=</HashCode>
       <FileName>DemoCharacter.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="D2Character">
-    <Position X="7.25" Y="0.5" Width="3" />
+    <Position X="8.25" Y="0.5" Width="2.75" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAQBIAAAACAAAgQAQCAAAIBAIBAAAQAgAACgAEAAAAA=</HashCode>
+      <HashCode>AAQBIAIAACAAAgQAQCAAAIBAIBAAAQAgAACgQEAAAAA=</HashCode>
       <FileName>2DCharacter.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Enemy">
-    <Position X="10.5" Y="7.75" Width="2" />
+    <Position X="11.5" Y="5.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAQAAgAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AgQAAgAAAAAAAAAAAAAAAAAAAAAAQAAAAACAAAAAAAA=</HashCode>
       <FileName>Enemy.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Player">
-    <Position X="4.25" Y="5.75" Width="2.25" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
+    <Position X="5.25" Y="5.25" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAQAgAAAAAAAAgEABAAAAAQQAAAAAAAAAAEAAQAAIAA=</HashCode>
+      <HashCode>AAQAgAAAAAAAAgEABAAAAAQQAAIAAAAAAAEAAQAAIBA=</HashCode>
       <FileName>Player.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="EnergyBall">
-    <Position X="12.75" Y="2" Width="2" />
+    <Position X="11.25" Y="1.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAACACgAAAAAgA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAgAAAAAAACACgAAAAAAA=</HashCode>
       <FileName>EnergyBall.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Level">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgSAAAAAAEAAogAABAAAAAAAAAAAAAABAQEAAAAAAAA=</HashCode>
+      <FileName>Level.h</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

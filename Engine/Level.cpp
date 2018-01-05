@@ -23,17 +23,17 @@ void Level::Draw()
 
 void Level::Update(const Vec2& dir,bool fire)
 {
+
 	float timer = ft.Mark();
-	//problem with the copy constructor of Player needs to check again about copy constructor and assigment cause im a dumb shit
-	//pc takes up to 6gb which is new record
-	//try to get the next position of the player without changing it until i know its valid move
 	hero->SetDirection(dir);
 	Vec2 pos= hero->GetPosition();
 	pos += hero->GetUpdatedPosition(timer);
 	Rect<int> heroRect(pos.x, pos.y, hero->GetWidth(), hero->GetHeight());
 	if (NextMoveValid(heroRect))
 	{
-		hero->Update(timer, gfx->GetScreenRect());
+		std::vector<D2Character*> allObs;
+		allObs.push_back(Obstacles[0]);
+		hero->Update(timer, gfx->GetScreenRect(),allObs);
 	}
 	if (fire)
 	{

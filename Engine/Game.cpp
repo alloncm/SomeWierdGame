@@ -74,6 +74,7 @@ void Game::UpdateModel()
 	demoLevel.Update(dir, fire);
 }
 
+
 void Game::ComposeFrame()
 {
 	demoLevel.Draw();

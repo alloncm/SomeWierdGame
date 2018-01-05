@@ -18,4 +18,3 @@ void EnergyBall::Update(float dt)
 	pos += vel*dt;
 }
 
-

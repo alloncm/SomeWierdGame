@@ -61,3 +61,8 @@ Vec2  D2Character::GetUpdatedPosition(float dt)
 {
 	return vel*dt;
 }
+
+bool D2Character::IsColliding(D2Character * obj)
+{
+	return this->GetRect().IsColliding(obj->GetRect());
+}
