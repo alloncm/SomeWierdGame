@@ -6,9 +6,7 @@ Level::Level(Player* p,Graphics& g,Obs* o)
 {
 	numObs = 0;
 	obs = o;
-	Obstacles.insert(Obstacles.begin(), new Obs);
-	*Obstacles[numObs] = *obs;
-	numObs++;
+	GenerateObstacles(obs, numObstaclesToGenerate);
 	hero = p;
 }
 
@@ -16,7 +14,7 @@ void Level::Draw()
 {
 	for (int i = 0; i < numObs; i++)
 	{
-		Obstacles[i]->Draw(*gfx);
+		//Obstacles[i]->Draw(*gfx);
 	}
 	hero->Draw(*gfx);
 }
@@ -32,7 +30,11 @@ void Level::Update(const Vec2& dir,bool fire)
 	if (NextMoveValid(heroRect))
 	{
 		std::vector<D2Character*> allObs;
-		allObs.push_back(Obstacles[0]);
+		for (int i = 0; i < numObs; i++)
+		{
+			allObs.push_back(Obstacles[i]);
+		}
+		
 		hero->Update(timer, gfx->GetScreenRect(),allObs);
 	}
 	if (fire)
@@ -48,6 +50,23 @@ Level::~Level()
 		delete Obstacles[i];
 		Obstacles[i] = nullptr;
 	}
+}
+
+void Level::GenerateObstacles(Obs * obs, int num)
+{
+	std::default_random_engine generator;
+	std::uniform_int_distribution<int> distributionH(0, gfx->ScreenHeight - 1 - obs->GetHeight());
+	std::uniform_int_distribution<int> distributionW(0, gfx->ScreenWidth - 1 - obs->GetWidth());
+	for (int i = 0; i < num; i++)
+	{
+		Vec2 pos(distributionW(generator), distributionH(generator));
+		Obs* ob = new Obs;
+		*ob = *obs;
+		ob->SetLocation(pos);
+		Obstacles.emplace_back(ob);
+	}
+	numObs = num;
+	
 }
 
 bool Level::NextMoveValid(Rect<int> hero)

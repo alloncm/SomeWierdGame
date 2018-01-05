@@ -94,6 +94,7 @@ void Player::Update(float dt, Rect<int> border, std::vector<D2Character*> obs)
 	DestroyFireBall(border);
 	while (!obs.empty())
 	{
+		//destroy any ball that touches other objects
 		D2Character* ob = obs.back();
 		for (int i = 0; i < countB; i++)
 		{
