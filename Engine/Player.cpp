@@ -88,9 +88,12 @@ void Player::DestroyFireBall(Rect<int>border)
  	}
 }
 
-void Player::Update(float dt, Rect<int> border, std::vector<D2Character*> obs)
+void Player::Update(float dt, Rect<int> border, std::vector<D2Character*> obs,bool canMove)
 {
-	DemoCharacter::Update(dt);
+	if (canMove)
+	{
+		DemoCharacter::Update(dt);
+	}
 	DestroyFireBall(border);
 	while (!obs.empty())
 	{

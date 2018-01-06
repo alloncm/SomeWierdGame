@@ -14,7 +14,7 @@ void Level::Draw()
 {
 	for (int i = 0; i < numObs; i++)
 	{
-		//Obstacles[i]->Draw(*gfx);
+		Obstacles[i]->Draw(*gfx);
 	}
 	hero->Draw(*gfx);
 }
@@ -27,16 +27,15 @@ void Level::Update(const Vec2& dir,bool fire)
 	Vec2 pos= hero->GetPosition();
 	pos += hero->GetUpdatedPosition(timer);
 	Rect<int> heroRect(pos.x, pos.y, hero->GetWidth(), hero->GetHeight());
-	if (NextMoveValid(heroRect))
+
+	std::vector<D2Character*> allObs;
+	for (int i = 0; i < numObs; i++)
 	{
-		std::vector<D2Character*> allObs;
-		for (int i = 0; i < numObs; i++)
-		{
-			allObs.push_back(Obstacles[i]);
-		}
-		
-		hero->Update(timer, gfx->GetScreenRect(),allObs);
+		allObs.push_back(Obstacles[i]);
 	}
+
+	hero->Update(timer, gfx->GetScreenRect(), allObs, NextMoveValid(heroRect));
+	
 	if (fire)
 	{
 		hero->FireBall();
