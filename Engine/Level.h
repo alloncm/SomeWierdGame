@@ -27,4 +27,5 @@ protected:
 	std::vector<Obs*> Obstacles;
 	FrameTimer ft; 
 	int numObstaclesToGenerate = 10;
+	Surface BackGround;
 };

@@ -67,7 +67,7 @@ void Game::UpdateModel()
 	}
 	float fire = false;
 	Keyboard::Event e = wnd.kbd.ReadKey();
-	if ( e.GetCode() == VK_SPACE && e.IsPress() )
+	if ( e.GetCode() == 'X' && e.IsPress() )
 	{
 		fire = true;
 	}

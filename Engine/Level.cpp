@@ -2,7 +2,8 @@
 
 Level::Level(Player* p,Graphics& g,Obs* o)
 	:
-	gfx(&g)      
+	gfx(&g),
+	BackGround("greenBack.bmp")
 {
 	numObs = 0;
 	obs = o;
@@ -12,6 +13,7 @@ Level::Level(Player* p,Graphics& g,Obs* o)
 
 void Level::Draw()
 {
+	gfx->DrawSprite(0, 0, BackGround, SpriteEffects::Copy());
 	for (int i = 0; i < numObs; i++)
 	{
 		Obstacles[i]->Draw(*gfx);
