@@ -1,6 +1,6 @@
 #include "Level.h"
 
-Level::Level(Player* p,Graphics& g,Obs* o)
+Level::Level(Player* p,Graphics& g,Obs* o,Enemy* e)
 	:
 	gfx(&g),
 	BackGround("greenBack.bmp")
@@ -9,6 +9,7 @@ Level::Level(Player* p,Graphics& g,Obs* o)
 	obs = o;
 	GenerateObstacles(obs, numObstaclesToGenerate);
 	hero = p;
+	enemy = e;
 }
 
 void Level::Draw()
@@ -18,6 +19,7 @@ void Level::Draw()
 	{
 		Obstacles[i]->Draw(*gfx);
 	}
+	enemy->Draw(*gfx);
 	hero->Draw(*gfx);
 }
 
@@ -30,18 +32,25 @@ void Level::Update(const Vec2& dir,bool fire)
 	pos += hero->GetUpdatedPosition(timer);
 	Rect<int> heroRect(pos.x, pos.y, hero->GetWidth(), hero->GetHeight());
 
+	//list of all the non player objects
 	std::vector<D2Character*> allObs;
 	for (int i = 0; i < numObs; i++)
 	{
+		allObs.emplace_back(enemy);
 		allObs.push_back(Obstacles[i]);
 	}
 
+	//updating the player
 	hero->Update(timer, gfx->GetScreenRect(), allObs, NextMoveValid(heroRect));
 	
+	//firing the energyballs
 	if (fire)
 	{
 		hero->FireBall();
 	}
+
+	//enemy
+	enemy->Update(eft.Mark(), hero);
 }
 
 Level::~Level()

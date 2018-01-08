@@ -6,8 +6,10 @@ class DemoCharacter : public D2Character
 {
 public:
 	DemoCharacter(std::string s, float spe, Vec2 p, int w, int h, Vec2_<int> searchStart, int animLong, float ht, int live = 1);
+	DemoCharacter(const DemoCharacter& other) = default;
 	virtual void Draw(Graphics& gfx)override;
 	virtual void Update(float dt)override;
+	virtual void Hit()override;
 	virtual void SetDirection(const Vec2& dir)override;
 	const Vec2& GetDirection() const;
 	virtual ~DemoCharacter() = default;

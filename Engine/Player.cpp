@@ -10,6 +10,8 @@ Player::Player(float spe, Vec2 p, int w, int h, Vec2_<int> searchStart, int anim
 }
 
 
+
+
 void Player::FireBall()
 {
 	Vec2 v = GetDirection();		//sets the position of the ball to match the character
@@ -103,6 +105,7 @@ void Player::Update(float dt, Rect<int> border, std::vector<D2Character*> obs,bo
 		{
 			if (ob->IsColliding(balls[i]))
 			{
+				ob->Hit();
 				delete balls[i];
 				balls[i] = balls[countB - 1];
 				balls[countB - 1] = nullptr;

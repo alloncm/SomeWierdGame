@@ -6,6 +6,9 @@ Enemy::Enemy(float spe, Vec2 p, int w, int h, Vec2_<int> searchStart, int animLo
 {
 }
 
+
+
+
 Vec2 Enemy::MoveEnemy(D2Character* dc)
 {
 	Vec2 dir(0, 0);

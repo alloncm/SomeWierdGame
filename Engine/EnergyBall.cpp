@@ -8,6 +8,12 @@ EnergyBall::EnergyBall( float speed, Vec2 position,Vec2 dir)
 	vel.y *= speed;
 }
 
+
+void EnergyBall::Hit()
+{
+	this->~EnergyBall();
+}
+
 void EnergyBall::SetDirection(const Vec2 & v)
 {
 	vel = v*speed;

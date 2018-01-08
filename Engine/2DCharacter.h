@@ -8,7 +8,7 @@
 class D2Character
 {
 public:
-	D2Character& operator=(D2Character& b) = default;
+	D2Character& operator=(const D2Character& b) = default;
 	virtual void Draw(Graphics& gfx);
 	virtual void Update(float dt);
 	virtual void SetDirection(const Vec2& v) = 0;
@@ -19,9 +19,11 @@ public:
 	const Vec2& GetPosition()const;
 	Vec2 GetUpdatedPosition(float dt);
 	virtual bool IsColliding(D2Character* obj);
+	virtual void Hit() = 0;
 	virtual ~D2Character() = default;
 protected:
 	D2Character() = default;
+	D2Character(const D2Character&) = default;
 	D2Character(std::string source, float speed, Vec2 position, Vec2 vel, Color bg, int width = 0, int height = 0);
 	
 protected:
@@ -31,6 +33,6 @@ protected:
 	float speed;			//the speed of the character
 	Color backGround;		//the background of the sprite to be removed
 	int width;				//the width of the character of in the sprite 
-							//(in case for animation sprites or sprites with more than one picture)
-	int height;				//the height of the character of in the sprite 
+	int height;				//(in case for animation sprites or sprites with more than one picture)
+							//the height of the character of in the sprite 
 };

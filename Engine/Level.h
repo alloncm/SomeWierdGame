@@ -5,6 +5,7 @@
 #include"Effects.h"
 #include<vector>
 #include<random>
+#include"Enemy.h"
 
 //represent a level of the game handles all the connection bewtween the other classes
 
@@ -12,7 +13,7 @@ class Level
 {
 public:
 	Level() = default;
-	Level(Player* p,Graphics& gfx,Obs* obs);
+	Level(Player* p,Graphics& gfx,Obs* obs,Enemy* e);
 	void Draw();									
 	void Update(const Vec2& dir, bool Plyerfire);
 	virtual ~Level();
@@ -28,4 +29,6 @@ protected:
 	FrameTimer ft; 
 	int numObstaclesToGenerate = 10;
 	Surface BackGround;
+	Enemy* enemy;
+	FrameTimer eft;
 };

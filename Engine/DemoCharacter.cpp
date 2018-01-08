@@ -1,6 +1,6 @@
 #include "DemoCharacter.h"
 
-DemoCharacter::DemoCharacter(std::string s, float spe, Vec2 p, int w, int h, Vec2_<int> searchStart,int animLong,float ht,int live)
+DemoCharacter::DemoCharacter(std::string s, float spe, Vec2 p, int w, int h, Vec2_<int> searchStart,int animLong,float ht,int l)
 	:
 	D2Character(s,spe,p,{0,0},Colors::Magenta,w,h),
 	iCurState(State::StandDown)
@@ -10,6 +10,7 @@ DemoCharacter::DemoCharacter(std::string s, float spe, Vec2 p, int w, int h, Vec
 		animations.emplace_back(Animation(searchStart.x+w, searchStart.y+(h*i), w, h, animLong,sprite, ht, backGround));
 		animations.emplace_back(Animation(searchStart.x, searchStart.y+(h*i), w, h, 1,sprite, ht, backGround));
 	}
+	live = l;
 }
 
 
@@ -22,6 +23,12 @@ void DemoCharacter::Update(float dt)
 {
 	pos += vel*dt;
 	animations[(int)iCurState].Update(dt);
+}
+
+void DemoCharacter::Hit()
+{
+	live--;
+	//add code to handle death
 }
 
 void DemoCharacter::SetDirection(const Vec2 & dir)
