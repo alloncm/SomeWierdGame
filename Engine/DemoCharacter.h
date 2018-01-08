@@ -9,7 +9,7 @@ public:
 	DemoCharacter(const DemoCharacter& other) = default;
 	virtual void Draw(Graphics& gfx)override;
 	virtual void Update(float dt)override;
-	virtual void Hit()override;
+	virtual bool Hit()override;			//return true if dead
 	virtual void SetDirection(const Vec2& dir)override;
 	const Vec2& GetDirection() const;
 	virtual ~DemoCharacter() = default;

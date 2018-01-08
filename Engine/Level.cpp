@@ -9,7 +9,7 @@ Level::Level(Player* p,Graphics& g,Obs* o,Enemy* e)
 	obs = o;
 	GenerateObstacles(obs, numObstaclesToGenerate);
 	hero = p;
-	enemy = e;
+	
 }
 
 void Level::Draw()
@@ -64,12 +64,12 @@ Level::~Level()
 
 void Level::GenerateObstacles(Obs * obs, int num)
 {
-	std::default_random_engine generator;
-	std::uniform_int_distribution<int> distributionH(0, gfx->ScreenHeight - 1 - obs->GetHeight());
-	std::uniform_int_distribution<int> distributionW(0, gfx->ScreenWidth - 1 - obs->GetWidth());
+	std::mt19937::result_type seed = time(0);
+	auto randH = std::bind(std::uniform_int_distribution<int>(0, gfx->ScreenHeight - 1), std::mt19937(seed));
+	auto randW = std::bind(std::uniform_int_distribution<int>(0, gfx->ScreenWidth - 1), std::mt19937(seed));
 	for (int i = 0; i < num; i++)
 	{
-		Vec2 pos(distributionW(generator), distributionH(generator));
+		Vec2 pos(randW(),randH());
 		Obs* ob = new Obs;
 		*ob = *obs;
 		ob->SetLocation(pos);
@@ -77,6 +77,18 @@ void Level::GenerateObstacles(Obs * obs, int num)
 	}
 	numObs = num;
 	
+}
+
+void Level::GenerateEnemies(int num)
+{
+	std::mt19937::result_type seed = time(0);
+	auto randH = std::bind(std::uniform_int_distribution<int>(0, gfx->ScreenHeight - 1), std::mt19937(seed));
+	auto randW = std::bind(std::uniform_int_distribution<int>(0, gfx->ScreenWidth - 1), std::mt19937(seed));
+
+	for (int i = 0; i < num; i++)
+	{
+
+	}
 }
 
 bool Level::NextMoveValid(Rect<int> hero)

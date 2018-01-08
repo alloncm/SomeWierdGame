@@ -25,9 +25,14 @@ void DemoCharacter::Update(float dt)
 	animations[(int)iCurState].Update(dt);
 }
 
-void DemoCharacter::Hit()
+bool DemoCharacter::Hit()
 {
 	live--;
+	if (live == 0)
+	{
+		return true;
+	}
+	return false;
 	//add code to handle death
 }
 

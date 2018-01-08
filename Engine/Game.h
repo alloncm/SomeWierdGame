@@ -31,6 +31,37 @@
 #include"Enemy.h"
 #include"Obs.h"
 #include"Level.h"
+
+
+//an object to hold the info to create the enemy;
+struct EnemyInfo
+{
+	float speed;
+	int width;
+	int height;
+	Vec2_<int> searchStart;
+	int animLong;
+	float holdtime;
+	int lives = 1;
+
+	EnemyInfo(float spe, int w, int h, Vec2_<int> search, int anLong, float ht, int live = 1)
+		:
+		speed(spe),
+		width(w),
+		height(h),
+		searchStart(search),
+		animLong(anLong),
+		holdtime(ht),
+		lives(live)
+	{
+	}
+
+	Enemy* Generate(Vec2_<float> pos)
+	{
+		return new Enemy(speed, pos, width, height, searchStart, animLong, holdtime);
+	}
+};
+
 class Game
 {
 public:
@@ -55,6 +86,7 @@ private:
 	EnergyBall ball;
 	Player cha;
 	FrameTimer ft;
+	EnemyInfo info;
 	Enemy enemy;
 	FrameTimer eft;
 	Obs obs;

@@ -21,15 +21,19 @@
 #include "MainWindow.h"
 #include "Game.h"
 
+
+
 Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
 	cha(100.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f, ball),
 	ball(250, { 200,200 }, { 1,0 }),
-	enemy(25.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f),
+	info(25.0f, 32, 48, Vec2_<int>{ 0,0 }, 3, 0.1f),
 	obs("rock1.bmp", { 100,100 }, Colors::Magenta, 48, 48),
-	demoLevel(&cha,gfx,&obs,&enemy)
+	demoLevel(&cha,gfx,&obs,info)
+
+
 {
 }
 

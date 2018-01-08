@@ -105,11 +105,12 @@ void Player::Update(float dt, Rect<int> border, std::vector<D2Character*> obs,bo
 		{
 			if (ob->IsColliding(balls[i]))
 			{
-				ob->Hit();
+				bool isDead = ob->Hit();
 				delete balls[i];
 				balls[i] = balls[countB - 1];
 				balls[countB - 1] = nullptr;
 				countB--;
+				//add code to delete the enemy if dead
 			}
 		}
 		obs.pop_back();

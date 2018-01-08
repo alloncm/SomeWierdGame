@@ -7,9 +7,9 @@ Obs::Obs(std::string source, Vec2 position, Color bg, int width, int height, flo
 }
 
 
-void Obs::Hit()
+bool Obs::Hit()
 {
-
+	return false;
 }
 
 bool Obs::IsColliding(const Rect<int>& r)

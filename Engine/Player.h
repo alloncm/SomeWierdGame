@@ -4,6 +4,7 @@
 #include"FrameTime.h"
 #include"FileNames.h"
 
+
 //represent a character which the player controls
 class Player : public DemoCharacter
 {

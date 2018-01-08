@@ -19,7 +19,7 @@ public:
 	const Vec2& GetPosition()const;
 	Vec2 GetUpdatedPosition(float dt);
 	virtual bool IsColliding(D2Character* obj);
-	virtual void Hit() = 0;
+	virtual bool Hit() = 0;
 	virtual ~D2Character() = default;
 protected:
 	D2Character() = default;

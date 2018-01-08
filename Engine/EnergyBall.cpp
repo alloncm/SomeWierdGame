@@ -9,9 +9,9 @@ EnergyBall::EnergyBall( float speed, Vec2 position,Vec2 dir)
 }
 
 
-void EnergyBall::Hit()
+bool EnergyBall::Hit()
 {
-	this->~EnergyBall();
+	return true;
 }
 
 void EnergyBall::SetDirection(const Vec2 & v)
