@@ -62,7 +62,7 @@ void Level::Update(const Vec2& dir,bool fire)
 		enemies[i]->first->Update(enemies[i]->second.Mark(), hero);
 	}
 
-	//delete the dead bodies
+	//delete the dead bodies OF MY ENEMIES
 	DeleteDeadEnemies();
 }
 

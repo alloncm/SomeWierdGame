@@ -92,9 +92,14 @@ void Player::DestroyFireBall(Rect<int>border)
 
 void Player::Update(float dt, Rect<int> border, std::vector<D2Character*> obs,bool canMove)
 {
-	if (canMove)
+	Vec2 lastPos = this->pos;
+	
+	DemoCharacter::Update(dt);
+
+	//aniamtion still works but player wont move
+	if (!canMove)
 	{
-		DemoCharacter::Update(dt);
+		this->pos = lastPos;
 	}
 	DestroyFireBall(border);
 	while (!obs.empty())

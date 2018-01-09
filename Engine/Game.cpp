@@ -32,8 +32,6 @@ Game::Game(MainWindow& wnd)
 	info(25.0f, 32, 48, Vec2_<int>{ 0,0 }, 3, 0.1f),
 	obs("rock1.bmp", { 100,100 }, Colors::Magenta, 48, 48),
 	demoLevel(&cha,gfx,&obs,info)
-
-
 {
 }
 
