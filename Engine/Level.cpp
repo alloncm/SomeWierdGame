@@ -22,7 +22,7 @@ void Level::Draw()
 	}
 	for (int i = 0; i < numEnemies; i++)
 	{
-		enemies[i].first->Draw(*gfx);
+		enemies[i]->first->Draw(*gfx);
 	}
 	hero->Draw(*gfx);
 }
@@ -34,7 +34,7 @@ void Level::Update(const Vec2& dir,bool fire)
 	hero->SetDirection(dir);
 	Vec2 pos= hero->GetPosition();
 	pos += hero->GetUpdatedPosition(timer);
-	Rect<int> heroRect(pos.x, pos.y, hero->GetWidth(), hero->GetHeight());
+	Rect<int> heroRect(int(pos.x), int(pos.y), hero->GetWidth(), hero->GetHeight());
 
 	//list of all the non player objects
 	std::vector<D2Character*> allObs;
@@ -44,7 +44,7 @@ void Level::Update(const Vec2& dir,bool fire)
 	}
 	for (int i = 0; i < numEnemies; i++)
 	{
-		allObs.push_back(enemies[i].first);
+		allObs.push_back(enemies[i]->first);
 	}
 
 	//updating the player
@@ -59,8 +59,11 @@ void Level::Update(const Vec2& dir,bool fire)
 	//enemy
 	for (int i = 0; i < numEnemies; i++)
 	{
-		enemies[i].first->Update(enemies[i].second.Mark(), hero);
+		enemies[i]->first->Update(enemies[i]->second.Mark(), hero);
 	}
+
+	//delete the dead bodies
+	DeleteDeadEnemies();
 }
 
 Level::~Level()
@@ -72,8 +75,10 @@ Level::~Level()
 	}
 	for (int i = 0; i < numEnemies; i++)
 	{
-		delete enemies[i].first;
-		enemies[i].first = nullptr;
+		delete enemies[i]->first;
+		enemies[i]->first = nullptr;
+		delete enemies[i];
+		enemies[i] = nullptr;
 	}
 }
 
@@ -104,10 +109,27 @@ void Level::GenerateEnemies(EnemyInfo& info, int num)
 	{
 		Vec2 pos(randW(), randH());
 		Enemy* en = info.Generate(pos);
-		std::pair<Enemy*, FrameTimer> pair(en, FrameTimer());
+		std::pair<Enemy*, FrameTimer>* pair = new std::pair<Enemy*, FrameTimer>(en, FrameTimer());
 		enemies.emplace_back(pair);
 	}
 	numEnemies = num;
+}
+
+void Level::DeleteDeadEnemies()
+{
+	for (int i = 0; i < numEnemies; i++)
+	{
+		if (!enemies[i]->first->IsAlive())
+		{
+			delete enemies[i]->first;
+			enemies[i]->first = nullptr;
+			delete enemies[i];
+			enemies[i] = nullptr;
+			enemies[i] = enemies[numEnemies - 1];
+			enemies[numEnemies - 1] = nullptr;
+			numEnemies--;
+		}
+	}
 }
 
 bool Level::NextMoveValid(Rect<int> hero)

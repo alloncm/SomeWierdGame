@@ -53,6 +53,7 @@ public:
 	virtual ~Level();
 	void GenerateObstacles(Obs* obs,int num);
 	void GenerateEnemies(EnemyInfo& info,int num);
+	void DeleteDeadEnemies();
 private:
 	bool NextMoveValid( Rect<int> hero);
 protected:
@@ -65,6 +66,6 @@ protected:
 	int numObstaclesToGenerate = 10;
 	int numEnemiesToGenerate = 5;
 	Surface BackGround;
-	std::vector<std::pair<Enemy*,FrameTimer>> enemies;
+	std::vector<std::pair<Enemy*,FrameTimer>*> enemies;
 	int numEnemies;
 };

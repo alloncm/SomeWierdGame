@@ -10,6 +10,7 @@ public:
 	virtual void Draw(Graphics& gfx)override;
 	virtual void Update(float dt)override;
 	virtual bool Hit()override;			//return true if dead
+	bool IsAlive();
 	virtual void SetDirection(const Vec2& dir)override;
 	const Vec2& GetDirection() const;
 	virtual ~DemoCharacter() = default;

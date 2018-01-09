@@ -69,7 +69,7 @@ void Game::UpdateModel()
 	{
 		dir.y += 1;
 	}
-	float fire = false;
+	bool fire = false;
 	Keyboard::Event e = wnd.kbd.ReadKey();
 	if ( e.GetCode() == 'X' && e.IsPress() )
 	{

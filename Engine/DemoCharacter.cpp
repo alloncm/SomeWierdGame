@@ -36,6 +36,15 @@ bool DemoCharacter::Hit()
 	//add code to handle death
 }
 
+bool DemoCharacter::IsAlive()
+{
+	if (live == 0)
+	{
+		return false;
+	}
+	return true;
+}
+
 void DemoCharacter::SetDirection(const Vec2 & dir)
 {
 	Vec2 d = dir;
