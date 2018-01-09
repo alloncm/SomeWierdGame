@@ -1,15 +1,16 @@
 #include "Level.h"
 
-Level::Level(Player* p,Graphics& g,Obs* o,Enemy* e)
+Level::Level(Player* p,Graphics& g,Obs* o,EnemyInfo& e)
 	:
 	gfx(&g),
 	BackGround("greenBack.bmp")
 {
 	numObs = 0;
+	numEnemies = 0;
 	obs = o;
 	GenerateObstacles(obs, numObstaclesToGenerate);
 	hero = p;
-	
+	GenerateEnemies(e, numEnemiesToGenerate);
 }
 
 void Level::Draw()
@@ -19,7 +20,10 @@ void Level::Draw()
 	{
 		Obstacles[i]->Draw(*gfx);
 	}
-	enemy->Draw(*gfx);
+	for (int i = 0; i < numEnemies; i++)
+	{
+		enemies[i].first->Draw(*gfx);
+	}
 	hero->Draw(*gfx);
 }
 
@@ -36,8 +40,11 @@ void Level::Update(const Vec2& dir,bool fire)
 	std::vector<D2Character*> allObs;
 	for (int i = 0; i < numObs; i++)
 	{
-		allObs.emplace_back(enemy);
 		allObs.push_back(Obstacles[i]);
+	}
+	for (int i = 0; i < numEnemies; i++)
+	{
+		allObs.push_back(enemies[i].first);
 	}
 
 	//updating the player
@@ -50,7 +57,10 @@ void Level::Update(const Vec2& dir,bool fire)
 	}
 
 	//enemy
-	enemy->Update(eft.Mark(), hero);
+	for (int i = 0; i < numEnemies; i++)
+	{
+		enemies[i].first->Update(enemies[i].second.Mark(), hero);
+	}
 }
 
 Level::~Level()
@@ -59,6 +69,11 @@ Level::~Level()
 	{
 		delete Obstacles[i];
 		Obstacles[i] = nullptr;
+	}
+	for (int i = 0; i < numEnemies; i++)
+	{
+		delete enemies[i].first;
+		enemies[i].first = nullptr;
 	}
 }
 
@@ -79,16 +94,20 @@ void Level::GenerateObstacles(Obs * obs, int num)
 	
 }
 
-void Level::GenerateEnemies(int num)
+void Level::GenerateEnemies(EnemyInfo& info, int num)
 {
 	std::mt19937::result_type seed = time(0);
 	auto randH = std::bind(std::uniform_int_distribution<int>(0, gfx->ScreenHeight - 1), std::mt19937(seed));
 	auto randW = std::bind(std::uniform_int_distribution<int>(0, gfx->ScreenWidth - 1), std::mt19937(seed));
-
+	
 	for (int i = 0; i < num; i++)
 	{
-
+		Vec2 pos(randW(), randH());
+		Enemy* en = info.Generate(pos);
+		std::pair<Enemy*, FrameTimer> pair(en, FrameTimer());
+		enemies.emplace_back(pair);
 	}
+	numEnemies = num;
 }
 
 bool Level::NextMoveValid(Rect<int> hero)
