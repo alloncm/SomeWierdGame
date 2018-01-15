@@ -20,7 +20,7 @@ private:
 	Vec2_<int> searchStart;
 	int animLong;
 	float holdtime;
-	int lives = 1;
+	int lives = 3;
 
 public:
 	EnemyInfo(float spe, int w, int h, Vec2_<int> search, int anLong, float ht, int live = 1)
@@ -37,7 +37,7 @@ public:
 
 	Enemy* Generate(Vec2_<float> pos)
 	{
-		return new Enemy(speed, pos, width, height, searchStart, animLong, holdtime);
+		return new Enemy(speed, pos, width, height, searchStart, animLong, holdtime,lives);
 	}
 };
 
@@ -54,6 +54,7 @@ public:
 	void GenerateObstacles(Obs* obs,int num);
 	void GenerateEnemies(EnemyInfo& info,int num);
 	void DeleteDeadEnemies();
+	bool IsGameOver();
 private:
 	bool NextMoveValid( Rect<int> hero);
 protected:

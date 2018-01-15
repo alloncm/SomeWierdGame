@@ -49,31 +49,34 @@ Game::~Game()
 
 void Game::UpdateModel()
 {
-	Vec2 dir(0.0f, 0.0f);
-	
-	if (wnd.kbd.KeyIsPressed(VK_LEFT))
+	if (!demoLevel.IsGameOver())
 	{
-		dir.x += -1;
+		Vec2 dir(0.0f, 0.0f);
+
+		if (wnd.kbd.KeyIsPressed(VK_LEFT))
+		{
+			dir.x += -1;
+		}
+		if (wnd.kbd.KeyIsPressed(VK_RIGHT))
+		{
+			dir.x += 1;
+		}
+		if (wnd.kbd.KeyIsPressed(VK_UP))
+		{
+			dir.y += -1;
+		}
+		if (wnd.kbd.KeyIsPressed(VK_DOWN))
+		{
+			dir.y += 1;
+		}
+		bool fire = false;
+		Keyboard::Event e = wnd.kbd.ReadKey();
+		if (e.GetCode() == 'X' && e.IsPress())
+		{
+			fire = true;
+		}
+		demoLevel.Update(dir, fire);
 	}
-	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
-	{
-		dir.x += 1;
-	}
-	if (wnd.kbd.KeyIsPressed(VK_UP))
-	{
-		dir.y += -1;
-	}
-	if (wnd.kbd.KeyIsPressed(VK_DOWN))
-	{
-		dir.y += 1;
-	}
-	bool fire = false;
-	Keyboard::Event e = wnd.kbd.ReadKey();
-	if ( e.GetCode() == 'X' && e.IsPress() )
-	{
-		fire = true;
-	}
-	demoLevel.Update(dir, fire);
 }
 
 

@@ -29,7 +29,6 @@ void Level::Draw()
 
 void Level::Update(const Vec2& dir,bool fire)
 {
-
 	float timer = ft.Mark();
 	hero->SetDirection(dir);
 	Vec2 pos= hero->GetPosition();
@@ -60,6 +59,10 @@ void Level::Update(const Vec2& dir,bool fire)
 	for (int i = 0; i < numEnemies; i++)
 	{
 		enemies[i]->first->Update(enemies[i]->second.Mark(), hero);
+		if (enemies[i]->first->IsColliding(hero))
+		{
+			hero->Hit();
+		}
 	}
 
 	//delete the dead bodies OF MY ENEMIES
@@ -130,6 +133,11 @@ void Level::DeleteDeadEnemies()
 			numEnemies--;
 		}
 	}
+}
+
+bool Level::IsGameOver()
+{
+	return !hero->IsAlive();
 }
 
 bool Level::NextMoveValid(Rect<int> hero)
