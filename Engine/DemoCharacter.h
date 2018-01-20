@@ -5,7 +5,7 @@
 class DemoCharacter : public D2Character
 {
 public:
-	DemoCharacter(std::string s, float spe, Vec2 p, int w, int h, Vec2_<int> searchStart, int animLong, float ht, int live = 1);
+	DemoCharacter(std::string source, float spe, Vec2 p, int w, int h, Vec2_<int> searchStart, int animLong, float ht, int live = 1);
 	DemoCharacter(const DemoCharacter& other) = default;
 	virtual void Draw(Graphics& gfx)override;
 	virtual void Update(float dt)override;

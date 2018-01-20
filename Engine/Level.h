@@ -8,7 +8,9 @@
 #include<functional>
 #include<utility>
 #include"Enemy.h"
+#include"SpritesManager.h"
 
+//add the sprite manager to the background
 
 //an object to hold the info to create the enemy;
 struct EnemyInfo

@@ -2,6 +2,7 @@
 #include"Surface.h"
 #include"Graphics.h"
 #include"Effects.h"
+#include"SpritesManager.h"
 
 //an abstract class to represent all the 2d objects and charachters in the game
 
@@ -25,14 +26,13 @@ protected:
 	D2Character() = default;
 	D2Character(const D2Character&) = default;
 	D2Character(std::string source, float speed, Vec2 position, Vec2 vel, Color bg, int width = 0, int height = 0);
-	
 protected:
-	Surface sprite;			//the sprite used to draw the character
-	Vec2 pos;				//the position of the character
-	Vec2 vel;				//the velocity direction of the character
-	float speed;			//the speed of the character
-	Color backGround;		//the background of the sprite to be removed
-	int width;				//the width of the character of in the sprite 
-	int height;				//(in case for animation sprites or sprites with more than one picture)
-							//the height of the character of in the sprite 
+	Surface* sprite;			//the sprite used to draw the character
+	Vec2 pos;					//the position of the character
+	Vec2 vel;					//the velocity direction of the character
+	float speed;				//the speed of the character
+	Color backGround;			//the background of the sprite to be removed
+	int width;					//the width of the character of in the sprite 
+	int height;					//(in case for animation sprites or sprites with more than one picture)
+								//the height of the character of in the sprite 
 };

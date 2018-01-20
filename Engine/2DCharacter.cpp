@@ -2,7 +2,7 @@
 
 D2Character::D2Character(std::string source, float speed, Vec2 position, Vec2 vel, Color bg,int w,int h)
 	:
-	sprite(source),
+	sprite(SpriteManager::GetManager().Get(source)),
 	speed(speed),
 	pos(position),
 	vel(vel),
@@ -10,20 +10,22 @@ D2Character::D2Character(std::string source, float speed, Vec2 position, Vec2 ve
 	width(w),
 	height(h)
 {
+	//Spm = Spm->Init(source);
+	//sprite = Spm->Get(source);
 	if (w == 0)
 	{
-		width = sprite.GetWidth();
+		width = sprite->GetWidth();
 	}
 	if (h == 0)
 	{
-		height = sprite.GetHeight();
+		height = sprite->GetHeight();
 	}
 }
 
 void D2Character::Draw(Graphics & gfx)
 {
 	Color c = backGround;
-	gfx.DrawSprite((int)pos.x, (int)pos.y, sprite,SpriteEffects::Chroma(c));
+	gfx.DrawSprite((int)pos.x, (int)pos.y, *sprite,SpriteEffects::Chroma(c));
 }
 
 void D2Character::Update(float dt)

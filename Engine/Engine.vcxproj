@@ -160,6 +160,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="SpritesManager.h" />
     <ClInclude Include="Surface.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="Weapon.h" />
@@ -183,6 +184,7 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Obs.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="SpritesManager.cpp" />
     <ClCompile Include="Surface.cpp" />
   </ItemGroup>
   <ItemGroup>

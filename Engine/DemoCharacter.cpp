@@ -7,8 +7,8 @@ DemoCharacter::DemoCharacter(std::string s, float spe, Vec2 p, int w, int h, Vec
 {
 	for (int i = 0; i < (int)State::Count; i++)
 	{
-		animations.emplace_back(Animation(searchStart.x+w, searchStart.y+(h*i), w, h, animLong,sprite, ht, backGround));
-		animations.emplace_back(Animation(searchStart.x, searchStart.y+(h*i), w, h, 1,sprite, ht, backGround));
+		animations.emplace_back(Animation(searchStart.x+w, searchStart.y+(h*i), w, h, animLong,*sprite, ht, backGround));
+		animations.emplace_back(Animation(searchStart.x, searchStart.y+(h*i), w, h, 1,*sprite, ht, backGround));
 	}
 	live = l;
 }
