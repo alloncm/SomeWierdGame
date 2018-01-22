@@ -10,8 +10,6 @@ D2Character::D2Character(std::string source, float speed, Vec2 position, Vec2 ve
 	width(w),
 	height(h)
 {
-	//Spm = Spm->Init(source);
-	//sprite = Spm->Get(source);
 	if (w == 0)
 	{
 		width = sprite->GetWidth();

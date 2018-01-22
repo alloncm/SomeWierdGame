@@ -27,11 +27,10 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	cha(100.0f, { 400,400 }, 32, 48, { 0,0 }, 3, 0.1f, ball),
 	ball(250, { 200,200 }, { 1,0 }),
 	info(25.0f, 32, 48, Vec2_<int>{ 0,0 }, 3, 0.1f),
-	obs("rock1.bmp", { 100,100 }, Colors::Magenta, 48, 48),
-	demoLevel(&cha,gfx,&obs,info),
+	obs("greyCube.bmp", { 100,100 }, Colors::Magenta, 30, 30),
+	demoLevel(&player,gfx,&obs,info),
 	player(100, { 100,100 },40,40,ball)
 {
 }
@@ -70,24 +69,38 @@ void Game::UpdateModel()
 		{
 			dir.y += 1;
 		}
-		/*
-		bool fire = false;
+
+
+		//handles the fire
 		Keyboard::Event e = wnd.kbd.ReadKey();
-		if (e.GetCode() == 'X' && e.IsPress())
+		Vec2 fireDir ( 0.0,0.0 );
+		if (e.GetCode() == 'A' && e.IsPress())
 		{
-			fire = true;
+			fireDir.x += -1;
 		}
-		demoLevel.Update(dir, fire);
-		*/
-		player.SetDirection(dir);
-		player.Update(ft.Mark());
+		else if (e.GetCode() == 'D' && e.IsPress())
+		{
+			fireDir.x += 1;
+		}
+		else if (e.GetCode() == 'W' && e.IsPress())
+		{
+			fireDir.y += -1;
+		}
+		else if (e.GetCode() == 'S' && e.IsPress())
+		{
+			fireDir.y += 1;
+		}
+
+		
+		demoLevel.Update(dir, fireDir);
+		
+		
 	}
 }
 
 
 void Game::ComposeFrame()
 {
-	//demoLevel.Draw();
-	player.Draw(gfx);
+	demoLevel.Draw();
 }
 

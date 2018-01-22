@@ -58,12 +58,11 @@ private:
 	/********************************/
 	/*  User Variables              */
 	EnergyBall ball;
-	Player cha;
+	SimplePlayer player;
 	FrameTimer ft;
 	EnemyInfo info;
 	FrameTimer eft;
 	Obs obs;
 	Level demoLevel;
-	SimplePlayer player;
 	/********************************/
 };

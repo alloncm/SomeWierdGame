@@ -12,12 +12,16 @@ public:
 	virtual void SetDirection(const Vec2& dir)override;
 	virtual bool Hit()override;
 	//Vec2 GetDirection();						
-	//void FireBall();
-	//void Update(float dt, Rect<int>border, std::vector<D2Character*> obs, bool canMove);		//updates the player based on the border of the screen and destroys the balls out of the screen
+	void FireBall(Vec2& dir);
+	virtual void Draw(Graphics& gfx)override;
+	bool IsAlive();
+	void Update(float dt, Rect<int>border, std::vector<D2Character*> obs, bool canMove);		//updates the player based on the border of the screen and destroys the balls out of the screen
 	virtual ~SimplePlayer();
 private:
-	//Vec2 GetBallMatchingPosition();
-	//void DestroyFireBall(Rect<int>Border);		//destroy the ball
+	Vec2 GetBallMatchingPosition();
+	void DestroyFireBall(Rect<int>Border);		//destroy the balls that are out of the rect border
+	void DestroyBall(int i);					//destroy one specific ball
+	void CreateBall();							//creates a ball
 	static constexpr int lives = 10;
 protected:
 	EnergyBall ball;			//ball for example

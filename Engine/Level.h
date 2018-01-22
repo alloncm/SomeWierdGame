@@ -9,6 +9,7 @@
 #include<utility>
 #include"Enemy.h"
 #include"SpritesManager.h"
+#include"SimplePlayer.h"
 
 //add the sprite manager to the background
 
@@ -49,9 +50,9 @@ class Level
 {
 public:
 	Level() = default;
-	Level(Player* p,Graphics& gfx,Obs* obs,EnemyInfo& info);
+	Level(SimplePlayer* p,Graphics& gfx,Obs* obs,EnemyInfo& info);
 	void Draw();									
-	void Update(const Vec2& dir, bool Plyerfire);
+	void Update(const Vec2& dir, Vec2 dirFire);
 	virtual ~Level();
 	void GenerateObstacles(Obs* obs,int num);
 	void GenerateEnemies(EnemyInfo& info,int num);
@@ -61,14 +62,14 @@ private:
 	bool NextMoveValid( Rect<int> hero);
 protected:
 	Graphics* gfx;
-	Player* hero;
+	SimplePlayer* hero;
 	int numObs;
 	Obs* obs;
 	std::vector<Obs*> Obstacles;
 	FrameTimer ft; 
 	int numObstaclesToGenerate = 10;
-	int numEnemiesToGenerate = 5;
-	Surface BackGround;
-	std::vector<std::pair<Enemy*,FrameTimer>*> enemies;
-	int numEnemies;
+	//int numEnemiesToGenerate = 5;
+	Surface* BackGround;
+	//std::vector<std::pair<Enemy*,FrameTimer>*> enemies;
+	//int numEnemies;
 };

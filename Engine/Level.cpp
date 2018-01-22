@@ -1,33 +1,35 @@
 #include "Level.h"
 
-Level::Level(Player* p,Graphics& g,Obs* o,EnemyInfo& e)
+Level::Level(SimplePlayer* p,Graphics& g,Obs* o,EnemyInfo& e)
 	:
-	gfx(&g),
-	BackGround("greenBack.bmp")
+	gfx(&g)
 {
 	numObs = 0;
-	numEnemies = 0;
+	//numEnemies = 0;
+	BackGround = SpriteManager::GetManager().Get(FileNames::back);
 	obs = o;
 	GenerateObstacles(obs, numObstaclesToGenerate);
 	hero = p;
-	GenerateEnemies(e, numEnemiesToGenerate);
+	//GenerateEnemies(e, numEnemiesToGenerate);
 }
 
 void Level::Draw()
 {
-	gfx->DrawSprite(0, 0, BackGround, SpriteEffects::Copy());
+	gfx->DrawSprite(0, 0, *BackGround, SpriteEffects::Copy());
 	for (int i = 0; i < numObs; i++)
 	{
 		Obstacles[i]->Draw(*gfx);
 	}
+	/*
 	for (int i = 0; i < numEnemies; i++)
 	{
 		enemies[i]->first->Draw(*gfx);
 	}
+	*/
 	hero->Draw(*gfx);
 }
 
-void Level::Update(const Vec2& dir,bool fire)
+void Level::Update(const Vec2& dir,Vec2 dirFire)
 {
 	float timer = ft.Mark();
 	hero->SetDirection(dir);
@@ -41,21 +43,18 @@ void Level::Update(const Vec2& dir,bool fire)
 	{
 		allObs.push_back(Obstacles[i]);
 	}
+	/*
 	for (int i = 0; i < numEnemies; i++)
 	{
 		allObs.push_back(enemies[i]->first);
 	}
-
+	*/
 	//updating the player
 	hero->Update(timer, gfx->GetScreenRect(), allObs, NextMoveValid(heroRect));
-	
-	//firing the energyballs
-	if (fire)
-	{
-		hero->FireBall();
-	}
+	hero->FireBall(dirFire);
 
 	//enemy
+	/*
 	for (int i = 0; i < numEnemies; i++)
 	{
 		enemies[i]->first->Update(enemies[i]->second.Mark(), hero);
@@ -64,9 +63,10 @@ void Level::Update(const Vec2& dir,bool fire)
 			hero->Hit();
 		}
 	}
+	*/
 
 	//delete the dead bodies OF MY ENEMIES
-	DeleteDeadEnemies();
+	//DeleteDeadEnemies();
 }
 
 Level::~Level()
@@ -76,6 +76,7 @@ Level::~Level()
 		delete Obstacles[i];
 		Obstacles[i] = nullptr;
 	}
+	/*
 	for (int i = 0; i < numEnemies; i++)
 	{
 		delete enemies[i]->first;
@@ -83,6 +84,7 @@ Level::~Level()
 		delete enemies[i];
 		enemies[i] = nullptr;
 	}
+	*/
 }
 
 void Level::GenerateObstacles(Obs * obs, int num)
@@ -93,15 +95,15 @@ void Level::GenerateObstacles(Obs * obs, int num)
 	for (int i = 0; i < num; i++)
 	{
 		Vec2 pos(randW(),randH());
-		Obs* ob = new Obs;
-		*ob = *obs;
+		Obs* ob = new Obs(*obs);
+		//*ob = *obs;
 		ob->SetLocation(pos);
 		Obstacles.emplace_back(ob);
 	}
 	numObs = num;
 	
 }
-
+/*
 void Level::GenerateEnemies(EnemyInfo& info, int num)
 {
 	std::mt19937::result_type seed = time(0);
@@ -134,7 +136,7 @@ void Level::DeleteDeadEnemies()
 		}
 	}
 }
-
+*/
 bool Level::IsGameOver()
 {
 	return !hero->IsAlive();
