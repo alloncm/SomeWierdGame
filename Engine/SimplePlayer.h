@@ -3,21 +3,26 @@
 #include"EnergyBall.h"
 #include"FrameTime.h"
 
+
+//idea: the player will fire to a specific place chosen by the user other stick or mouse or keyboard, the player will have a white symbol to indicate where to shoot
 class SimplePlayer : public D2Character
 {
 public:
 	SimplePlayer(float spe, Vec2 p, int w, int h, EnergyBall& b);
-	void FireBall();
-	void Update(float dt, Rect<int>border, std::vector<D2Character*> obs, bool canMove);		//updates the player based on the border of the screen and destroys the balls out of the screen
-	virtual void Draw(Graphics& gfx)override;
+	virtual void SetDirection(const Vec2& dir)override;
+	virtual bool Hit()override;
+	//Vec2 GetDirection();						
+	//void FireBall();
+	//void Update(float dt, Rect<int>border, std::vector<D2Character*> obs, bool canMove);		//updates the player based on the border of the screen and destroys the balls out of the screen
 	virtual ~SimplePlayer();
 private:
-	Vec2 GetBallMatchingPosition();
-	void DestroyFireBall(Rect<int>Border);		//destroy the ball
+	//Vec2 GetBallMatchingPosition();
+	//void DestroyFireBall(Rect<int>Border);		//destroy the ball
 	static constexpr int lives = 10;
 protected:
 	EnergyBall ball;			//ball for example
 	EnergyBall** balls;			// array of pointer to balls
 	int countB;					// counts the num of balls 
 	FrameTimer ft;				//frame timer for the balls
+	int live;					//the lives of the character
 };

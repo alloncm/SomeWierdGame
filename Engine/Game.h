@@ -31,6 +31,7 @@
 #include"Enemy.h"
 #include"Obs.h"
 #include"Level.h"
+#include"SimplePlayer.h"
 
 
 
@@ -63,5 +64,6 @@ private:
 	FrameTimer eft;
 	Obs obs;
 	Level demoLevel;
+	SimplePlayer player;
 	/********************************/
 };

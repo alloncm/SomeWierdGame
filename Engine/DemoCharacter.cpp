@@ -50,7 +50,7 @@ void DemoCharacter::SetDirection(const Vec2 & dir)
 	Vec2 d = dir;
 	d.Normalize();
 	vel = d*speed;
-		//check this the character wont stop the animation
+
 	if (dir.x < 0)
 	{
 		iCurState = State::WalkLeft;

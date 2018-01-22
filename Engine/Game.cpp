@@ -31,7 +31,8 @@ Game::Game(MainWindow& wnd)
 	ball(250, { 200,200 }, { 1,0 }),
 	info(25.0f, 32, 48, Vec2_<int>{ 0,0 }, 3, 0.1f),
 	obs("rock1.bmp", { 100,100 }, Colors::Magenta, 48, 48),
-	demoLevel(&cha,gfx,&obs,info)
+	demoLevel(&cha,gfx,&obs,info),
+	player(100, { 100,100 },40,40,ball)
 {
 }
 
@@ -69,6 +70,7 @@ void Game::UpdateModel()
 		{
 			dir.y += 1;
 		}
+		/*
 		bool fire = false;
 		Keyboard::Event e = wnd.kbd.ReadKey();
 		if (e.GetCode() == 'X' && e.IsPress())
@@ -76,12 +78,16 @@ void Game::UpdateModel()
 			fire = true;
 		}
 		demoLevel.Update(dir, fire);
+		*/
+		player.SetDirection(dir);
+		player.Update(ft.Mark());
 	}
 }
 
 
 void Game::ComposeFrame()
 {
-	demoLevel.Draw();
+	//demoLevel.Draw();
+	player.Draw(gfx);
 }
 
