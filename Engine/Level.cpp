@@ -5,12 +5,12 @@ Level::Level(SimplePlayer* p,Graphics& g,Obs* o,EnemyInfo& e)
 	gfx(&g)
 {
 	numObs = 0;
-	//numEnemies = 0;
+	numEnemies = 0;
 	BackGround = SpriteManager::GetManager().Get(FileNames::back);
 	obs = o;
 	GenerateObstacles(obs, numObstaclesToGenerate);
 	hero = p;
-	//GenerateEnemies(e, numEnemiesToGenerate);
+	GenerateEnemies(e, numEnemiesToGenerate);
 }
 
 void Level::Draw()
@@ -20,12 +20,12 @@ void Level::Draw()
 	{
 		Obstacles[i]->Draw(*gfx);
 	}
-	/*
+	
 	for (int i = 0; i < numEnemies; i++)
 	{
 		enemies[i]->first->Draw(*gfx);
 	}
-	*/
+	
 	hero->Draw(*gfx);
 }
 
@@ -43,27 +43,29 @@ void Level::Update(const Vec2& dir,Vec2 dirFire)
 	{
 		allObs.push_back(Obstacles[i]);
 	}
-	/*
+	
 	for (int i = 0; i < numEnemies; i++)
 	{
 		allObs.push_back(enemies[i]->first);
 	}
-	*/
+	
 	//updating the player
 	hero->Update(timer, gfx->GetScreenRect(), allObs, NextMoveValid(heroRect));
 	hero->FireBall(dirFire);
 
 	//enemy
-	/*
+	
 	for (int i = 0; i < numEnemies; i++)
 	{
 		enemies[i]->first->Update(enemies[i]->second.Mark(), hero);
+		/*
 		if (enemies[i]->first->IsColliding(hero))
 		{
 			hero->Hit();
 		}
+		*/
 	}
-	*/
+	
 
 	//delete the dead bodies OF MY ENEMIES
 	//DeleteDeadEnemies();
@@ -76,7 +78,7 @@ Level::~Level()
 		delete Obstacles[i];
 		Obstacles[i] = nullptr;
 	}
-	/*
+	
 	for (int i = 0; i < numEnemies; i++)
 	{
 		delete enemies[i]->first;
@@ -84,7 +86,7 @@ Level::~Level()
 		delete enemies[i];
 		enemies[i] = nullptr;
 	}
-	*/
+	
 }
 
 void Level::GenerateObstacles(Obs * obs, int num)
@@ -103,23 +105,21 @@ void Level::GenerateObstacles(Obs * obs, int num)
 	numObs = num;
 	
 }
-/*
-void Level::GenerateEnemies(EnemyInfo& info, int num)
+void Level::GenerateEnemies(EnemyInfo & info, int num)
 {
 	std::mt19937::result_type seed = time(0);
 	auto randH = std::bind(std::uniform_int_distribution<int>(0, gfx->ScreenHeight - 1), std::mt19937(seed));
 	auto randW = std::bind(std::uniform_int_distribution<int>(0, gfx->ScreenWidth - 1), std::mt19937(seed));
-	
+
 	for (int i = 0; i < num; i++)
 	{
 		Vec2 pos(randW(), randH());
-		Enemy* en = info.Generate(pos);
-		std::pair<Enemy*, FrameTimer>* pair = new std::pair<Enemy*, FrameTimer>(en, FrameTimer());
+		SimpleEnemy* en = info.Generate(pos);
+		std::pair<SimpleEnemy*, FrameTimer>* pair = new std::pair<SimpleEnemy*, FrameTimer>(en, FrameTimer());
 		enemies.emplace_back(pair);
 	}
 	numEnemies = num;
 }
-
 void Level::DeleteDeadEnemies()
 {
 	for (int i = 0; i < numEnemies; i++)
@@ -136,7 +136,7 @@ void Level::DeleteDeadEnemies()
 		}
 	}
 }
-*/
+
 bool Level::IsGameOver()
 {
 	return !hero->IsAlive();

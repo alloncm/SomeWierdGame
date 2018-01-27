@@ -28,7 +28,7 @@ Game::Game(MainWindow& wnd)
 	wnd(wnd),
 	gfx(wnd),
 	ball(250, { 200,200 }, { 1,0 }),
-	info(25.0f, 32, 48, Vec2_<int>{ 0,0 }, 3, 0.1f),
+	info(25.0f, 40, 40,  3 ),
 	obs("greyCube.bmp", { 100,100 }, Colors::Magenta, 30, 30),
 	demoLevel(&player,gfx,&obs,info),
 	player(100, { 100,100 },40,40,ball)

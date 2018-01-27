@@ -9,4 +9,5 @@ namespace FileNames
 	const static std::string blast("energy18x18.bmp");
 	const static std::string SHero("redCube.bmp");
 	const static std::string back("greenBack.bmp");
+	const static std::string SEnemy("PurpleCube.bmp");
 }

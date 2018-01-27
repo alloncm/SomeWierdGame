@@ -105,6 +105,9 @@
     <ClInclude Include="SimplePlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SimpleEnemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
@@ -168,6 +171,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SimplePlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleEnemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SurfaceOD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsOD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

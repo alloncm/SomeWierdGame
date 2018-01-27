@@ -88,5 +88,6 @@ public:
 	{
 		return RectI({ (int)v1.x,(int)v1.y }, { (int)v2.x,(int)v2.y});
 	}
+
 };
 typedef Rect<int> RectI;

@@ -1,5 +1,6 @@
 #include "2DCharacter.h"
 
+
 D2Character::D2Character(std::string source, float speed, Vec2 position, Vec2 vel, Color bg,int w,int h)
 	:
 	sprite(SpriteManager::GetManager().Get(source)),
