@@ -124,3 +124,13 @@ public:
 	static constexpr int ScreenWidth = 800;
 	static constexpr int ScreenHeight = 600;
 };
+
+#include"Effects.h"
+#ifndef GOD_GRAPHICS
+extern template
+void Graphics::DrawSprite<SpriteEffects::Copy>(int x, int y, RectI & src, RectI & clip, const Surface & s, SpriteEffects::Copy effect);
+extern template
+void Graphics::DrawSprite<SpriteEffects::Substitution>(int x, int y, RectI & src, RectI & clip, const Surface & s, SpriteEffects::Substitution effect);
+extern template
+void Graphics::DrawSprite<SpriteEffects::Chroma>(int x, int y, RectI & src, RectI & clip, const Surface & s, SpriteEffects::Chroma effect);
+#endif 

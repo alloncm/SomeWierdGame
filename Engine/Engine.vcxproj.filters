@@ -176,10 +176,10 @@
     <ClCompile Include="SimpleEnemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SurfaceOD.cpp">
+    <ClCompile Include="GraphicsOD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GraphicsOD.cpp">
+    <ClCompile Include="SurfaceOD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
