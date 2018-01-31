@@ -27,7 +27,7 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	ball(250, { 200,200 }, { 1,0 }),
+	ball(FileNames::blast,250, { 200,200 }, { 1,0 }),
 	info(FileNames::SEnemy,25.0f, { 100,100 },3),
 	obs("greyCube.bmp", { 100,100 }, Colors::Magenta),
 	demoLevel(&player,gfx,&obs,info),

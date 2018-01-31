@@ -7,7 +7,7 @@
 class EnergyBall : public D2Character
 {
 public:
-	EnergyBall(float speed,Vec2 position,Vec2 dir);	
+	EnergyBall(std::string source,float speed,Vec2 position,Vec2 dir);	
 	EnergyBall(const EnergyBall& other) = default;
 	EnergyBall() = default;
 	EnergyBall& operator=(const EnergyBall& b) = default;

@@ -1,8 +1,8 @@
 #include "EnergyBall.h"
 
-EnergyBall::EnergyBall( float speed, Vec2 position,Vec2 dir)
+EnergyBall::EnergyBall(std::string source, float speed, Vec2 position,Vec2 dir)
 	:
-	D2Character(FileNames::blast,speed,position,dir,Colors::Magenta)
+	D2Character(source,speed,position,dir,Colors::Magenta)
 {
 	vel.x *= speed;
 	vel.y *= speed;
