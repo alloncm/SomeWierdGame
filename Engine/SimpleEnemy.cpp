@@ -1,8 +1,8 @@
 #include "SimpleEnemy.h"
 
-SimpleEnemy::SimpleEnemy(std::string source, float spe, Vec2 p, int w, int h, int l)
+SimpleEnemy::SimpleEnemy(std::string source, float spe, Vec2 p,  int l)
 	:
-	D2Character(source,spe,p,{0,0},Colors::Magenta,w,h),
+	D2Character(source,spe,p,{0,0},Colors::Magenta),
 	lives(l)
 {
 }
@@ -40,5 +40,5 @@ bool SimpleEnemy::IsAlive()
 
 RectI SimpleEnemy::GetRangeRect()
 {
-	return RectI({ int(pos.x) - range,int(pos.y) - range }, { int(pos.x) + width + range,int(pos.y) + height + range });
+	return RectI({ int(pos.x) - range,int(pos.y) - range }, { int(pos.x) +sprite->GetWidth()+ range,int(pos.y) + sprite->GetHeight() + range });
 }

@@ -1,6 +1,6 @@
 #include "Level.h"
 
-Level::Level(SimplePlayer* p,Graphics& g,Obs* o,EnemyInfo& e)
+Level::Level(SimplePlayer* p,Graphics& g,Obs* o,SimpleEnemy& e)
 	:
 	gfx(&g)
 {
@@ -105,7 +105,7 @@ void Level::GenerateObstacles(Obs * obs, int num)
 	numObs = num;
 	
 }
-void Level::GenerateEnemies(EnemyInfo & info, int num)
+void Level::GenerateEnemies(SimpleEnemy & info, int num)
 {
 	std::mt19937::result_type seed = time(0);
 	auto randH = std::bind(std::uniform_int_distribution<int>(0, gfx->ScreenHeight - 1), std::mt19937(seed));
@@ -114,7 +114,7 @@ void Level::GenerateEnemies(EnemyInfo & info, int num)
 	for (int i = 0; i < num; i++)
 	{
 		Vec2 pos(randW(), randH());
-		SimpleEnemy* en = info.Generate(pos);
+		SimpleEnemy* en = new SimpleEnemy(info);
 		std::pair<SimpleEnemy*, FrameTimer>* pair = new std::pair<SimpleEnemy*, FrameTimer>(en, FrameTimer());
 		enemies.emplace_back(pair);
 	}

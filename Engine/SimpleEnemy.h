@@ -4,7 +4,7 @@
 class SimpleEnemy : public D2Character
 {
 public:
-	SimpleEnemy(std::string source, float spe, Vec2 p, int w, int h, int l = 1);
+	SimpleEnemy(std::string source, float spe, Vec2 p, int l = 1);
 	SimpleEnemy(const SimpleEnemy& s) = default;
 	void Update(float dt, D2Character* dc);
 	virtual void SetDirection(const Vec2& dir)override;

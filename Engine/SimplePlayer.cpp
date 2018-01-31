@@ -1,8 +1,8 @@
 #include "SimplePlayer.h"
 //need to add string for sprite
-SimplePlayer::SimplePlayer(float spe, Vec2 p, int w, int h, EnergyBall & b)
+SimplePlayer::SimplePlayer(float spe, Vec2 p,EnergyBall & b)
 	:
-	D2Character(FileNames::SHero , spe, p, vel, Colors::Magenta, w, h),
+	D2Character(FileNames::SHero , spe, p, vel, Colors::Magenta),
 	live(lives),
 	countB(0)
 {
@@ -90,7 +90,7 @@ SimplePlayer::~SimplePlayer()
 
 Vec2 SimplePlayer::GetBallMatchingPosition()
 {
-	return this->pos + Vec2((this->width / 2) - (ball.GetWidth()/2), (this->height / 2) - (ball.GetHeight()/2));
+	return this->pos + Vec2((sprite->GetWidth()/ 2) - (ball.GetWidth()/2), (sprite->GetHeight() / 2) - (ball.GetHeight()/2));
 }
 
 void SimplePlayer::DestroyFireBall(Rect<int> Border)

@@ -5,7 +5,7 @@
 class Obs : public D2Character
 {
 public:
-	Obs(std::string source, Vec2 position, Color bg, int width = 0, int height = 0, float speed = 0.0);
+	Obs(std::string source, Vec2 position, Color bg, float speed = 0.0);
 	Obs& operator= ( Obs& other)= default;
 	Obs(const Obs& other) = default;
 	virtual bool Hit()override;

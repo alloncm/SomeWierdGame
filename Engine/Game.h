@@ -60,7 +60,7 @@ private:
 	EnergyBall ball;
 	SimplePlayer player;
 	FrameTimer ft;
-	EnemyInfo info;
+	SimpleEnemy info;
 	FrameTimer eft;
 	Obs obs;
 	Level demoLevel;

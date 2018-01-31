@@ -1,8 +1,8 @@
 #include "Obs.h"
 
-Obs::Obs(std::string source, Vec2 position, Color bg, int width, int height, float speed)
+Obs::Obs(std::string source, Vec2 position, Color bg, float speed)
 	:
-	D2Character(source,speed,position,{0,0},bg,width,height)
+	D2Character(source,speed,position,{0,0},bg)
 {
 }
 

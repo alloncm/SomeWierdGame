@@ -2,7 +2,7 @@
 
 DemoCharacter::DemoCharacter(std::string s, float spe, Vec2 p, int w, int h, Vec2_<int> searchStart,int animLong,float ht,int l)
 	:
-	D2Character(s,spe,p,{0,0},Colors::Magenta,w,h),
+	D2Character(s,spe,p,{0,0},Colors::Magenta),
 	iCurState(State::StandDown)
 {
 	for (int i = 0; i < (int)State::Count; i++)

@@ -1,24 +1,15 @@
 #include "2DCharacter.h"
 
 
-D2Character::D2Character(std::string source, float speed, Vec2 position, Vec2 vel, Color bg,int w,int h)
+D2Character::D2Character(std::string source, float speed, Vec2 position, Vec2 vel, Color bg)
 	:
 	sprite(SpriteManager::GetManager().Get(source)),
 	speed(speed),
 	pos(position),
 	vel(vel),
-	backGround(bg),
-	width(w),
-	height(h)
+	backGround(bg)
 {
-	if (w == 0)
-	{
-		width = sprite->GetWidth();
-	}
-	if (h == 0)
-	{
-		height = sprite->GetHeight();
-	}
+	
 }
 
 void D2Character::Draw(Graphics & gfx)
@@ -34,17 +25,17 @@ void D2Character::Update(float dt)
 
 int D2Character::GetWidth() const
 {
-	return this->width;
+	return this->sprite->GetWidth();
 }
 
 int D2Character::GetHeight() const
 {
-	return height;
+	return this->sprite->GetHeight();
 }
 
 const Rect<int> D2Character::GetRect() const
 {
-	return RectI({ (int)pos.x,(int)pos.y }, { (int)pos.x + width,(int)pos.y + height });
+	return RectI({ (int)pos.x,(int)pos.y }, { (int)pos.x + sprite->GetWidth(),(int)pos.y + sprite->GetHeight() });
 }
 
 void D2Character::SetLocation(const Vec2 & p)

@@ -8,7 +8,7 @@
 class SimplePlayer : public D2Character
 {
 public:
-	SimplePlayer(float spe, Vec2 p, int w, int h, EnergyBall& b);
+	SimplePlayer(float spe, Vec2 p, EnergyBall& b);
 	virtual void SetDirection(const Vec2& dir)override;
 	virtual bool Hit()override;
 	//Vec2 GetDirection();						

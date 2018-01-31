@@ -13,30 +13,7 @@
 
 //add the sprite manager to the background
 
-//an object to hold the info to create the enemy;
-struct EnemyInfo
-{
-private:
-	float speed;
-	int width;
-	int height;
-	int lives = 3;
 
-public:
-	EnemyInfo(float spe, int w, int h, int live = 1)
-		:
-		speed(spe),
-		width(w),
-		height(h),
-		lives(live)
-	{
-	}
-
-	SimpleEnemy* Generate(Vec2_<float> pos)
-	{
-		return new SimpleEnemy(FileNames::SEnemy,speed, pos, width, height,lives);
-	}
-};
 
 //represent a level of the game handles all the connection bewtween the other classes
 
@@ -44,12 +21,12 @@ class Level
 {
 public:
 	Level() = default;
-	Level(SimplePlayer* p,Graphics& gfx,Obs* obs,EnemyInfo& info);
+	Level(SimplePlayer* p,Graphics& gfx,Obs* obs,SimpleEnemy& info);
 	void Draw();									
 	void Update(const Vec2& dir, Vec2 dirFire);
 	virtual ~Level();
 	void GenerateObstacles(Obs* obs,int num);
-	void GenerateEnemies(EnemyInfo& info,int num);
+	void GenerateEnemies(SimpleEnemy& info,int num);
 	void DeleteDeadEnemies();
 	bool IsGameOver();
 private:
