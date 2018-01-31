@@ -4,12 +4,16 @@ Level::Level(SimplePlayer* p,Graphics& g,Obs* o,SimpleEnemy& e)
 	:
 	gfx(&g)
 {
+	grid.resize((gfx->ScreenHeight / o->GetHeight())*(gfx->ScreenWidth / o->GetWidth()));
+	std::fill(grid.begin(), grid.end(), false);
 	numObs = 0;
 	numEnemies = 0;
 	BackGround = SpriteManager::GetManager().Get(FileNames::back);
 	obs = o;
 	GenerateObstacles(obs, numObstaclesToGenerate);
 	hero = p;
+	Vec2_<int> pos = GetUniqueVector(0, gfx->ScreenWidth / obs->GetWidth() - 1, 0, gfx->ScreenHeight / obs->GetHeight() - 1);
+	hero->SetLocation(Vec2(pos.x,pos.y));
 	GenerateEnemies(e, numEnemiesToGenerate);
 }
 
@@ -91,15 +95,14 @@ Level::~Level()
 
 void Level::GenerateObstacles(Obs * obs, int num)
 {
-	std::mt19937::result_type seed = time(0);
-	auto randH = std::bind(std::uniform_int_distribution<int>(0, gfx->ScreenHeight - 1), std::mt19937(seed));
-	auto randW = std::bind(std::uniform_int_distribution<int>(0, gfx->ScreenWidth - 1), std::mt19937(seed));
+	int gridW = gfx->ScreenWidth / obs->GetWidth() -1;
+	int gridH = gfx->ScreenHeight / obs->GetHeight()-1 ;
+	
 	for (int i = 0; i < num; i++)
 	{
-		Vec2 pos(randW(),randH());
+		Vec2_<int> pos = GetUniqueVector(0, gridW, 0, gridH);
 		Obs* ob = new Obs(*obs);
-		//*ob = *obs;
-		ob->SetLocation(pos);
+		ob->SetLocation(Vec2(pos.x*ob->GetWidth(),pos.y*ob->GetHeight()));
 		Obstacles.emplace_back(ob);
 	}
 	numObs = num;
@@ -107,14 +110,14 @@ void Level::GenerateObstacles(Obs * obs, int num)
 }
 void Level::GenerateEnemies(SimpleEnemy & info, int num)
 {
-	std::mt19937::result_type seed = time(0);
-	auto randH = std::bind(std::uniform_int_distribution<int>(0, gfx->ScreenHeight - 1), std::mt19937(seed));
-	auto randW = std::bind(std::uniform_int_distribution<int>(0, gfx->ScreenWidth - 1), std::mt19937(seed));
+	int gridW = gfx->ScreenWidth / obs->GetWidth()-1;
+	int gridH = gfx->ScreenHeight / obs->GetHeight()-1;
 
 	for (int i = 0; i < num; i++)
 	{
-		Vec2 pos(randW(), randH());
+		Vec2_<int> pos = GetUniqueVector(0, gridW, 0, gridH);
 		SimpleEnemy* en = new SimpleEnemy(info);
+		en->SetLocation(Vec2(pos.x*en->GetWidth(),pos.y*en->GetHeight()));
 		std::pair<SimpleEnemy*, FrameTimer>* pair = new std::pair<SimpleEnemy*, FrameTimer>(en, FrameTimer());
 		enemies.emplace_back(pair);
 	}
@@ -153,4 +156,26 @@ bool Level::NextMoveValid(Rect<int> hero)
 		}
 	}
 	return valid;
+}
+
+Vec2_<int> Level::RandomVector(int sx, int ex, int sy , int ey)
+{
+	std::uniform_int_distribution<int> xDist(sx, ex);
+	std::uniform_int_distribution<int> yDist(sy, ey);
+	auto v = Vec2_<int>(xDist(rng), yDist(rng));;
+	return v;
+}
+
+Vec2_<int> Level::GetUniqueVector(int sx, int ex, int sy, int ey)
+{
+	int gridW = gfx->ScreenWidth / obs->GetWidth() - 1;
+	int gridH = gfx->ScreenHeight / obs->GetHeight() - 1;
+
+	Vec2_<int> pos = RandomVector(sx, ex, sy, ey);
+	while (grid[gridW*pos.y + pos.x] == true)
+	{
+		pos = RandomVector(0, gridW, 0, gridH);
+	}
+	grid[gridW*pos.y + pos.x] = true;
+	return pos;
 }

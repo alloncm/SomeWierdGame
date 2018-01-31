@@ -6,6 +6,7 @@
 #include<vector>
 #include<random>
 #include<functional>
+#include<algorithm>
 #include<utility>
 #include"SimpleEnemy.h"
 #include"SpritesManager.h"
@@ -31,6 +32,8 @@ public:
 	bool IsGameOver();
 private:
 	bool NextMoveValid( Rect<int> hero);
+	Vec2_<int> RandomVector(int sx, int ex, int sy, int ey);
+	Vec2_<int> GetUniqueVector(int sx, int ex, int sy, int ey);
 protected:
 	Graphics* gfx;
 	SimplePlayer* hero;
@@ -43,4 +46,6 @@ protected:
 	Surface* BackGround;
 	std::vector<std::pair<SimpleEnemy*,FrameTimer>*> enemies;
 	int numEnemies;
+	std::vector<bool> grid;
+	std::mt19937 rng;
 };
