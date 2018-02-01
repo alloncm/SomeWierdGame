@@ -3,11 +3,13 @@
 #include"EnergyBall.h"
 #include"FrameTime.h"
 #include <memory>
+#include<vector>
 class SimpleEnemy : public D2Character
 {
 public:
 	SimpleEnemy(std::string source, float spe, Vec2 p, int l = 1);
-	SimpleEnemy(const SimpleEnemy& s) = default;
+	SimpleEnemy& operator=(const SimpleEnemy& s);
+	SimpleEnemy(const SimpleEnemy& s);//try to implemet this function cuase unique_ptr cant be cipied and this might be the problem
 	void Update(float dt, Rect<int>border, std::vector<D2Character*> obs,D2Character* hero);
 	virtual void SetDirection(const Vec2& dir)override;
 	virtual bool Hit()override;
@@ -25,7 +27,7 @@ private:
 	EnergyBall ball;
 	FrameTimer ft;
 	FrameTimer shooter;
-	const float shootTime = 1.0f;
+	static constexpr float shootTime = 1.0f;
 	float shootCount;
 	//add fire ability
 	//the layer walks to the hero if its outside of the range

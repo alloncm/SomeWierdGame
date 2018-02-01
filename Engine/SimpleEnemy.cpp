@@ -11,6 +11,29 @@ SimpleEnemy::SimpleEnemy(std::string source, float spe, Vec2 p, int l)
 	shootCount = 0;
 }
 
+SimpleEnemy & SimpleEnemy::operator=(const SimpleEnemy & s)
+{
+	this->backGround = s.backGround;
+	this->ball = s.ball;
+	this->balls.resize(0);
+	this->lives = s.lives;
+	this->pos = s.pos;
+	this->shootCount = 0.0f;
+	this->speed = s.speed;
+	this->sprite = s.sprite;
+	this->vel = s.vel;
+	return *this;
+}
+
+SimpleEnemy::SimpleEnemy(const SimpleEnemy & s)
+	:
+	D2Character(s)
+{
+	this->ball = s.ball;
+	this->shootCount = 0;
+	this->balls.resize(0);
+}
+
 void SimpleEnemy::Update(float dt, Rect<int>border, std::vector<D2Character*> obs,D2Character* hero)
 {
 	

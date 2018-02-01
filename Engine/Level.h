@@ -21,7 +21,6 @@
 class Level
 {
 public:
-	Level() = default;
 	Level(SimplePlayer* p,Graphics& gfx,Obs* obs,SimpleEnemy& info);
 	void Draw();									
 	void Update(const Vec2& dir, Vec2 dirFire);
