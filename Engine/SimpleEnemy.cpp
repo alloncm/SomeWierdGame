@@ -57,7 +57,7 @@ void SimpleEnemy::Update(float dt, Rect<int>border, std::vector<D2Character*> ob
 		bool wreck = false;
 		for (int j = 0; j < obs.size(); j++)
 		{
-			if (obs[j]->IsColliding(balls[i].get()))
+			if (this!=obs[j]&&obs[j]->IsColliding(balls[i].get()))
 			{
 				wreck = true;
 			}
@@ -86,6 +86,15 @@ bool SimpleEnemy::Hit()
 	return lives == 0;
 }
 
+void SimpleEnemy::Draw(Graphics & gfx)
+{
+	D2Character::Draw(gfx);
+	for (int i = 0; i < balls.size(); i++)
+	{
+		balls[i]->Draw(gfx);
+	}
+}
+
 bool SimpleEnemy::IsAlive()
 {
 	return lives != 0;
@@ -101,8 +110,10 @@ void SimpleEnemy::FireBall(const Vec2 & dir)
 	Vec2 d = dir;
 	d.Normalize();
 	balls.resize(balls.size() + 1);
-	balls[balls.size() - 1] = std::make_unique<EnergyBall>(ball);
-	balls[balls.size() - 1]->SetDirection(dir);
+	int i = balls.size() - 1;
+	balls[i] = std::make_unique<EnergyBall>(ball);
+	balls[i]->SetLocation(this->GetPosition());
+	balls[i]->SetDirection(d);
 }
 
 void SimpleEnemy::DestroyBall(int i)
@@ -114,7 +125,7 @@ void SimpleEnemy::DestroyBalls(const Rect<int>& Border)
 {
 	for (int i = 0; i < balls.size(); i++)
 	{
-		if (balls[i]->GetRect().IsColliding(Border))
+		if (!balls[i]->GetRect().IsColliding(Border))
 		{
 			DestroyBall(i);
 		}

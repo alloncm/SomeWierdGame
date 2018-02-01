@@ -13,6 +13,7 @@ public:
 	void Update(float dt, Rect<int>border, std::vector<D2Character*> obs,D2Character* hero);
 	virtual void SetDirection(const Vec2& dir)override;
 	virtual bool Hit()override;
+	virtual void Draw(Graphics& gfx)override;
 	bool IsAlive();
 	virtual ~SimpleEnemy() = default;
 private:
