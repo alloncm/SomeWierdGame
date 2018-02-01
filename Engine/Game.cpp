@@ -53,19 +53,19 @@ void Game::UpdateModel()
 	{
 		Vec2 dir(0.0f, 0.0f);
 
-		if (wnd.kbd.KeyIsPressed(VK_LEFT))
+		if (wnd.kbd.KeyIsPressed('A'))
 		{
 			dir.x += -1;
 		}
-		if (wnd.kbd.KeyIsPressed(VK_RIGHT))
+		if (wnd.kbd.KeyIsPressed('D'))
 		{
 			dir.x += 1;
 		}
-		if (wnd.kbd.KeyIsPressed(VK_UP))
+		if (wnd.kbd.KeyIsPressed('W'))
 		{
 			dir.y += -1;
 		}
-		if (wnd.kbd.KeyIsPressed(VK_DOWN))
+		if (wnd.kbd.KeyIsPressed('S'))
 		{
 			dir.y += 1;
 		}
@@ -74,19 +74,19 @@ void Game::UpdateModel()
 		//handles the fire
 		Keyboard::Event e = wnd.kbd.ReadKey();
 		Vec2 fireDir ( 0.0,0.0 );
-		if (e.GetCode() == 'A' && e.IsPress())
+		if (e.GetCode() == VK_LEFT && e.IsPress())
 		{
 			fireDir.x += -1;
 		}
-		else if (e.GetCode() == 'D' && e.IsPress())
+		else if (e.GetCode() == VK_RIGHT && e.IsPress())
 		{
 			fireDir.x += 1;
 		}
-		else if (e.GetCode() == 'W' && e.IsPress())
+		else if (e.GetCode() == VK_UP && e.IsPress())
 		{
 			fireDir.y += -1;
 		}
-		else if (e.GetCode() == 'S' && e.IsPress())
+		else if (e.GetCode() == VK_DOWN && e.IsPress())
 		{
 			fireDir.y += 1;
 		}
