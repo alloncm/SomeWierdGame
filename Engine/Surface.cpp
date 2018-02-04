@@ -25,7 +25,7 @@ Surface::Surface(const Surface & s)
 Surface::Surface(const std::string & filename)
 {
 	std::ifstream file(filename,std::ios::binary);
-	assert(file);
+	file.exceptions(std::ios::failbit | std::ios::badbit);
 
 	BITMAPFILEHEADER bmFileHeader;
 

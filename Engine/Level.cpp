@@ -21,7 +21,7 @@ void Level::Draw()
 {
 	if (hero->IsAlive())
 	{
-		gfx->DrawSprite(0, 0, *BackGround, SpriteEffects::Copy());
+		//gfx->DrawSprite(0, 0, *BackGround, SpriteEffects::Copy());
 		for (int i = 0; i < numObs; i++)
 		{
 			Obstacles[i]->Draw(*gfx);
