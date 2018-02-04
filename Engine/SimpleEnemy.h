@@ -4,6 +4,7 @@
 #include"FrameTime.h"
 #include <memory>
 #include<vector>
+#include<typeinfo>
 class SimpleEnemy : public D2Character
 {
 public:

@@ -19,55 +19,66 @@ Level::Level(SimplePlayer* p,Graphics& g,Obs* o,SimpleEnemy& e)
 
 void Level::Draw()
 {
-	gfx->DrawSprite(0, 0, *BackGround, SpriteEffects::Copy());
-	for (int i = 0; i < numObs; i++)
+	if (hero->IsAlive())
 	{
-		Obstacles[i]->Draw(*gfx);
+		gfx->DrawSprite(0, 0, *BackGround, SpriteEffects::Copy());
+		for (int i = 0; i < numObs; i++)
+		{
+			Obstacles[i]->Draw(*gfx);
+		}
+
+		for (int i = 0; i < numEnemies; i++)
+		{
+			enemies[i]->first->Draw(*gfx);
+		}
+
+		hero->Draw(*gfx);
 	}
-	
-	for (int i = 0; i < numEnemies; i++)
+	else
 	{
-		enemies[i]->first->Draw(*gfx);
+		gfx->DrawSprite(250, 150, *(SpriteManager::GetManager().Get(FileNames::GameOver)),SpriteEffects::Copy());
 	}
-	
-	hero->Draw(*gfx);
 }
 
 void Level::Update(const Vec2& dir,Vec2 dirFire)
 {
-	float timer = ft.Mark();
-	hero->SetDirection(dir);
-	Vec2 pos= hero->GetPosition();
-	pos += hero->GetUpdatedPosition(timer);
-	Rect<int> heroRect(int(pos.x), int(pos.y), hero->GetWidth(), hero->GetHeight());
-
-	//list of all the non player objects
-	std::vector<D2Character*> allObs;
-	for (int i = 0; i < numObs; i++)
+	if (hero->IsAlive())
 	{
-		allObs.push_back(Obstacles[i]);
-	}
-	
-	for (int i = 0; i < numEnemies; i++)
-	{
-		allObs.push_back(enemies[i]->first);
-	}
-	
-	//updating the player
-	hero->Update(timer, gfx->GetScreenRect(), allObs, NextMoveValid(heroRect));
-	hero->FireBall(dirFire);
+		float timer = ft.Mark();
+		hero->SetDirection(dir);
+		Vec2 pos = hero->GetPosition();
+		pos += hero->GetUpdatedPosition(timer);
+		Rect<int> heroRect(int(pos.x), int(pos.y), hero->GetWidth(), hero->GetHeight());
 
-	//enemy
-	
-	for (int i = 0; i < numEnemies; i++)
-	{
-		enemies[i]->first->Update(enemies[i]->second.Mark(), gfx->GetScreenRect(), allObs, hero);
-		
-	}
-	
+		//list of all the objects
+		std::vector<D2Character*> allObs;
+		for (int i = 0; i < numObs; i++)
+		{
+			allObs.push_back(Obstacles[i]);
+		}
 
-	//delete the dead bodies OF MY ENEMIES
-	DeleteDeadEnemies();
+		for (int i = 0; i < numEnemies; i++)
+		{
+			allObs.push_back(enemies[i]->first);
+		}
+		allObs.push_back(hero);
+
+		//updating the player
+		hero->Update(timer, gfx->GetScreenRect(), allObs, NextMoveValid(heroRect));
+		hero->FireBall(dirFire);
+
+		//enemy
+
+		for (int i = 0; i < numEnemies; i++)
+		{
+			enemies[i]->first->Update(enemies[i]->second.Mark(), gfx->GetScreenRect(), allObs, hero);
+
+		}
+
+
+		//delete the dead bodies OF MY ENEMIES
+		DeleteDeadEnemies();
+	}
 }
 
 Level::~Level()

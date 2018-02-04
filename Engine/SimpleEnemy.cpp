@@ -62,6 +62,10 @@ void SimpleEnemy::Update(float dt, Rect<int>border, std::vector<D2Character*> ob
 			if (this!=obs[j]&&obs[j]->IsColliding(balls[i].get()))
 			{
 				wreck = true;
+				if (typeid(hero) == typeid(obs[j]))
+				{
+					obs[j]->Hit();
+				}
 			}
 		}
 		if (wreck)

@@ -10,4 +10,5 @@ namespace FileNames
 	const static std::string SHero("redCube.bmp");
 	const static std::string back("greenBack.bmp");
 	const static std::string SEnemy("PurpleCube.bmp");
+	const static std::string GameOver("gameover.bmp");
 }
