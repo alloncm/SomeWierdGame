@@ -7,7 +7,7 @@
 class SimpleEnemy : public D2Character
 {
 public:
-	SimpleEnemy(std::string source, float spe, Vec2 p, int l = 1);
+	SimpleEnemy(std::string source, float spe, Vec2 p, int l = 3);
 	SimpleEnemy& operator=(const SimpleEnemy& s);
 	SimpleEnemy(const SimpleEnemy& s);//try to implemet this function cuase unique_ptr cant be cipied and this might be the problem
 	void Update(float dt, Rect<int>border, std::vector<D2Character*> obs,D2Character* hero);

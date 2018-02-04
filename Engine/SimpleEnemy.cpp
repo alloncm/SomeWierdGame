@@ -29,6 +29,7 @@ SimpleEnemy::SimpleEnemy(const SimpleEnemy & s)
 	:
 	D2Character(s)
 {
+	this->lives = s.lives;
 	this->ball = s.ball;
 	this->shootCount = 0;
 	this->balls.resize(0);
@@ -52,6 +53,7 @@ void SimpleEnemy::Update(float dt, Rect<int>border, std::vector<D2Character*> ob
 
 	DestroyBalls(border);
 
+	float Dtime = ft.Mark();
 	for (int i = 0; i < balls.size(); i++)
 	{
 		bool wreck = false;
@@ -68,14 +70,10 @@ void SimpleEnemy::Update(float dt, Rect<int>border, std::vector<D2Character*> ob
 		}
 		else
 		{
-			//balls[i]->Update(ft.Mark());
+			balls[i]->Update(Dtime);
 		}
 	}
-	float Dtime = ft.Mark();
-	for (int i = 0; i < balls.size(); i++)
-	{
-		balls[i]->Update(Dtime);
-	}
+	
 }
 
 void SimpleEnemy::SetDirection(const Vec2 & dir)

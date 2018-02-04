@@ -65,6 +65,7 @@ void SimplePlayer::Update(float dt, Rect<int> border, std::vector<D2Character*> 
 		{
 			if (ob->IsColliding(balls[i]))
 			{
+				ob->Hit();
 				DestroyBall(i);
 			}
 		}

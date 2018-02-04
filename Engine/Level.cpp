@@ -67,7 +67,7 @@ void Level::Update(const Vec2& dir,Vec2 dirFire)
 	
 
 	//delete the dead bodies OF MY ENEMIES
-	//DeleteDeadEnemies();
+	DeleteDeadEnemies();
 }
 
 Level::~Level()
@@ -131,6 +131,7 @@ void Level::DeleteDeadEnemies()
 			enemies[i] = enemies[numEnemies - 1];
 			enemies[numEnemies - 1] = nullptr;
 			numEnemies--;
+			enemies.shrink_to_fit();
 		}
 	}
 }
