@@ -68,8 +68,13 @@ void SimpleEnemy::Update(float dt, Rect<int>border, std::vector<D2Character*> ob
 		}
 		else
 		{
-			balls[i]->Update(ft.Mark());
+			//balls[i]->Update(ft.Mark());
 		}
+	}
+	float Dtime = ft.Mark();
+	for (int i = 0; i < balls.size(); i++)
+	{
+		balls[i]->Update(Dtime);
 	}
 }
 

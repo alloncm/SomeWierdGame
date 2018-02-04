@@ -62,12 +62,7 @@ void Level::Update(const Vec2& dir,Vec2 dirFire)
 	for (int i = 0; i < numEnemies; i++)
 	{
 		enemies[i]->first->Update(enemies[i]->second.Mark(), gfx->GetScreenRect(), allObs, hero);
-		/*
-		if (enemies[i]->first->IsColliding(hero))
-		{
-			hero->Hit();
-		}
-		*/
+		
 	}
 	
 
