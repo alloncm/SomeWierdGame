@@ -104,7 +104,7 @@ public:
 			}
 		}
 	}
-	RectI GetScreenRect()const;
+	static RectI GetScreenRect();
 	~Graphics();
 private:
 	Microsoft::WRL::ComPtr<IDXGISwapChain>				pSwapChain;

@@ -24,7 +24,7 @@ private:
 	void DestroyBalls(const Rect<int>& Border);
 private:
 	int lives;
-	static constexpr int range = 100;
+	static constexpr int range = 400;
 	std::vector<std::unique_ptr<EnergyBall>> balls;
 	EnergyBall ball;
 	FrameTimer ft;

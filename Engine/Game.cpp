@@ -27,11 +27,11 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	ball(FileNames::blast,250, { 200,200 }, { 1,0 }),
-	info(FileNames::SEnemy,250.0f, { 100,100 },3),
+	ball(FileNames::blast,150, { 200,200 }, { 1,0 }),
+	info(FileNames::SEnemy,100, { 100,100 },3),
 	obs("greyCube.bmp", { 100,100 }, Colors::Magenta),
 	demoLevel(&player,gfx,&obs,info),
-	player(100, { 100,100 },ball)
+	player(200, { 400,400 },ball)
 {
 }
 

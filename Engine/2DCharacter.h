@@ -19,6 +19,7 @@ public:
 	void SetLocation(const Vec2& p);
 	const Vec2& GetPosition()const;
 	Vec2 GetUpdatedPosition(float dt);
+	bool InsideScreen();
 	virtual bool IsColliding(D2Character* obj);
 	virtual bool Hit() = 0;							//return true if dead
 	virtual ~D2Character() = default;

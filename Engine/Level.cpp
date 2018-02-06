@@ -6,14 +6,10 @@ Level::Level(SimplePlayer* p,Graphics& g,Obs* o,SimpleEnemy& e)
 {
 	grid.resize((gfx->ScreenHeight / o->GetHeight())*(gfx->ScreenWidth / o->GetWidth()));
 	std::fill(grid.begin(), grid.end(), false);
-	numObs = 0;
-	numEnemies = 0;
 	BackGround = SpriteManager::GetManager().Get(FileNames::back);
 	obs = o;
 	GenerateObstacles(obs, numObstaclesToGenerate);
 	hero = p;
-	Vec2_<int> pos = GetUniqueVector(0, gfx->ScreenWidth / obs->GetWidth() - 1, 0, gfx->ScreenHeight / obs->GetHeight() - 1);
-	hero->SetLocation(Vec2(pos.x,pos.y));
 	GenerateEnemies(e, numEnemiesToGenerate);
 }
 
@@ -22,12 +18,12 @@ void Level::Draw()
 	if (hero->IsAlive())
 	{
 		//gfx->DrawSprite(0, 0, *BackGround, SpriteEffects::Copy());
-		for (int i = 0; i < numObs; i++)
+		for (int i = 0; i < Obstacles.size(); i++)
 		{
 			Obstacles[i]->Draw(*gfx);
 		}
 
-		for (int i = 0; i < numEnemies; i++)
+		for (int i = 0; i <enemies.size(); i++)
 		{
 			enemies[i]->first->Draw(*gfx);
 		}
@@ -52,12 +48,12 @@ void Level::Update(const Vec2& dir,Vec2 dirFire)
 
 		//list of all the objects
 		std::vector<D2Character*> allObs;
-		for (int i = 0; i < numObs; i++)
+		for (int i = 0; i <Obstacles.size(); i++)
 		{
 			allObs.push_back(Obstacles[i]);
 		}
 
-		for (int i = 0; i < numEnemies; i++)
+		for (int i = 0; i < enemies.size(); i++)
 		{
 			allObs.push_back(enemies[i]->first);
 		}
@@ -69,7 +65,7 @@ void Level::Update(const Vec2& dir,Vec2 dirFire)
 
 		//enemy
 
-		for (int i = 0; i < numEnemies; i++)
+		for (int i = 0; i < enemies.size(); i++)
 		{
 			enemies[i]->first->Update(enemies[i]->second.Mark(), gfx->GetScreenRect(), allObs, hero);
 
@@ -83,13 +79,13 @@ void Level::Update(const Vec2& dir,Vec2 dirFire)
 
 Level::~Level()
 {
-	for (int i = 0; i < numObs; i++)
+	for (int i = 0; i < Obstacles.size(); i++)
 	{
 		delete Obstacles[i];
 		Obstacles[i] = nullptr;
 	}
 	
-	for (int i = 0; i < numEnemies; i++)
+	for (int i = 0; i < enemies.size(); i++)
 	{
 		delete enemies[i]->first;
 		enemies[i]->first = nullptr;
@@ -101,37 +97,31 @@ Level::~Level()
 
 void Level::GenerateObstacles(Obs * obs, int num)
 {
-	int gridW = gfx->ScreenWidth / obs->GetWidth() -1;
-	int gridH = gfx->ScreenHeight / obs->GetHeight()-1 ;
-	
-	for (int i = 0; i < num; i++)
+	std::string filename = "Level0Obs.txt";
+	auto v = GenerateFromFile(filename);
+	for(int i=0;i<v.size();i++)
 	{
-		Vec2_<int> pos = GetUniqueVector(0, gridW, 0, gridH);
+		//create the Obstacle
 		Obs* ob = new Obs(*obs);
-		ob->SetLocation(Vec2(pos.x*ob->GetWidth(),pos.y*ob->GetHeight()));
+		ob->SetLocation(v[i]);
 		Obstacles.emplace_back(ob);
 	}
-	numObs = num;
-	
 }
 void Level::GenerateEnemies(SimpleEnemy & info, int num)
 {
-	int gridW = gfx->ScreenWidth / obs->GetWidth()-1;
-	int gridH = gfx->ScreenHeight / obs->GetHeight()-1;
-
-	for (int i = 0; i < num; i++)
+	std::string filename = "Level0Ene.txt";
+	auto v = GenerateFromFile(filename);
+	for(int i=0;i<v.size();i++)
 	{
-		Vec2_<int> pos = GetUniqueVector(0, gridW, 0, gridH);
 		SimpleEnemy* en = new SimpleEnemy(info);
-		en->SetLocation(Vec2(pos.x*en->GetWidth(),pos.y*en->GetHeight()));
+		en->SetLocation(v[i]);
 		std::pair<SimpleEnemy*, FrameTimer>* pair = new std::pair<SimpleEnemy*, FrameTimer>(en, FrameTimer());
 		enemies.emplace_back(pair);
 	}
-	numEnemies = num;
 }
 void Level::DeleteDeadEnemies()
 {
-	for (int i = 0; i < numEnemies; i++)
+	for (int i = 0; i < enemies.size(); i++)
 	{
 		if (!enemies[i]->first->IsAlive())
 		{
@@ -139,10 +129,9 @@ void Level::DeleteDeadEnemies()
 			enemies[i]->first = nullptr;
 			delete enemies[i];
 			enemies[i] = nullptr;
-			enemies[i] = enemies[numEnemies - 1];
-			enemies[numEnemies - 1] = nullptr;
-			numEnemies--;
-			enemies.shrink_to_fit();
+			enemies[i] = enemies[enemies.size() - 1];
+			enemies[enemies.size() - 1] = nullptr;
+			enemies.resize(enemies.size() - 1);
 		}
 	}
 }
@@ -155,7 +144,7 @@ bool Level::IsGameOver()
 bool Level::NextMoveValid(Rect<int> hero)
 {
 	bool valid = true;
-	for (int i = 0; i < numObs; i++)
+	for (int i = 0; i < Obstacles.size(); i++)
 	{
 		if (Obstacles[i]->IsColliding(hero))
 		{
@@ -185,4 +174,54 @@ Vec2_<int> Level::GetUniqueVector(int sx, int ex, int sy, int ey)
 	}
 	grid[gridW*pos.y + pos.x] = true;
 	return pos;
+}
+
+std::vector<Vec2> Level::GenerateFromFile(std::string filename)
+{
+	std::vector<Vec2>v;
+	std::ifstream fin(filename);
+	fin.exceptions(std::ios::badbit);
+	while (fin.peek() != EOF)
+	{
+		char c = fin.get();
+		Vec2 pos;
+		//getting the pos for the new obs
+		if (c == '(')
+		{
+			c = fin.get();
+			std::string buffer = "";
+			while (c != ',')
+			{
+
+				buffer += c;
+				c = fin.get();
+			}
+			try
+			{
+				pos.x = std::stoi(buffer);
+			}
+			catch (...)
+			{
+				throw std::exception("unable to load the place of the Obstacles");
+			}
+			c = fin.get();
+			buffer = "";
+			while (c != ')')
+			{
+				buffer += c;
+				c = fin.get();
+			}
+			try
+			{
+				pos.y = std::stoi(buffer);
+			}
+			catch (...)
+			{
+				throw std::exception("unable to load the place of the Obstacles");
+			}
+		}
+		c = fin.get();
+		v.emplace_back(pos);
+	}
+	return v;
 }

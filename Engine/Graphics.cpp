@@ -302,7 +302,7 @@ void Graphics::EndFrame()
 
 
 
-RectI Graphics::GetScreenRect() const
+RectI Graphics::GetScreenRect()
 {
 	return{{ 0,0 }, { ScreenWidth-1,ScreenHeight-1 }};
 }

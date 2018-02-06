@@ -65,7 +65,7 @@ Surface::Surface(const std::string & filename)
 
 	file.seekg(bmFileHeader.bfOffBits);
 
-	//padding i sonly for 24 bit mode
+	//padding is only for 24 bit mode
 	const int padding = (4 - (width * 3) % 4) % 4;
 
 	for (int y = yStart; y != yEnd; y+=yd)
