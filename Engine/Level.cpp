@@ -4,13 +4,17 @@ Level::Level(SimplePlayer* p,Graphics& g,Obs* o,SimpleEnemy& e)
 	:
 	gfx(&g)
 {
+	level=0;
+	Levels.emplace_back(LevelCon("Level0H.txt", "Level0Obs.txt", "Level0Ene.txt"));
+	Levels.emplace_back(LevelCon("Level1H.txt", "Level1Obs.txt", "Level1Ene.txt"));
 	grid.resize((gfx->ScreenHeight / o->GetHeight())*(gfx->ScreenWidth / o->GetWidth()));
 	std::fill(grid.begin(), grid.end(), false);
-	BackGround = SpriteManager::GetManager().Get(FileNames::back);
 	obs = o;
-	GenerateObstacles(obs, numObstaclesToGenerate);
+	GenerateObstacles(obs);
 	hero = p;
-	GenerateEnemies(e, numEnemiesToGenerate);
+	hero->SetLocation(Levels[level].GetHero());
+	ene = &e;
+	GenerateEnemies(*ene);
 }
 
 void Level::Draw()
@@ -40,6 +44,7 @@ void Level::Update(const Vec2& dir,Vec2 dirFire)
 {
 	if (hero->IsAlive())
 	{
+		Vec2 oldPos = hero->GetPosition();
 		float timer = ft.Mark();
 		hero->SetDirection(dir);
 		Vec2 pos = hero->GetPosition();
@@ -74,6 +79,20 @@ void Level::Update(const Vec2& dir,Vec2 dirFire)
 
 		//delete the dead bodies OF MY ENEMIES
 		DeleteDeadEnemies();
+
+		//switch Level
+		//ToDo: add call to the function switch Level
+		bool success = false;
+	
+		if (!hero->InsideScreen() && hero->GetPosition().x > Graphics::ScreenWidth-hero->GetWidth())
+		{
+			success = SwitchNextLevel();
+			
+		}
+		if (!success&& !hero->InsideScreen())
+		{
+			hero->SetLocation(oldPos);
+		}
 	}
 }
 
@@ -95,10 +114,9 @@ Level::~Level()
 	
 }
 
-void Level::GenerateObstacles(Obs * obs, int num)
+void Level::GenerateObstacles(Obs * obs)
 {
-	std::string filename = "Level0Obs.txt";
-	auto v = GenerateFromFile(filename);
+	auto& v = Levels[level].GetObs();
 	for(int i=0;i<v.size();i++)
 	{
 		//create the Obstacle
@@ -107,17 +125,31 @@ void Level::GenerateObstacles(Obs * obs, int num)
 		Obstacles.emplace_back(ob);
 	}
 }
-void Level::GenerateEnemies(SimpleEnemy & info, int num)
+void Level::GenerateEnemies(SimpleEnemy & info)
 {
-	std::string filename = "Level0Ene.txt";
-	auto v = GenerateFromFile(filename);
+	auto& v = Levels[level].GetEne();
 	for(int i=0;i<v.size();i++)
 	{
+		//create the Enemy
 		SimpleEnemy* en = new SimpleEnemy(info);
 		en->SetLocation(v[i]);
 		std::pair<SimpleEnemy*, FrameTimer>* pair = new std::pair<SimpleEnemy*, FrameTimer>(en, FrameTimer());
 		enemies.emplace_back(pair);
 	}
+}
+bool Level::SwitchNextLevel()
+{
+	if (level < Levels.size() - 1)
+	{
+		Obstacles.clear();
+		enemies.clear();
+		level++;
+		GenerateObstacles(obs);
+		GenerateEnemies(*ene);
+		hero->SetLocation(Levels[level].GetHero());
+		return true;
+	}
+	return false;
 }
 void Level::DeleteDeadEnemies()
 {
@@ -176,6 +208,8 @@ Vec2_<int> Level::GetUniqueVector(int sx, int ex, int sy, int ey)
 	return pos;
 }
 
+
+//not using right now
 std::vector<Vec2> Level::GenerateFromFile(std::string filename)
 {
 	std::vector<Vec2>v;
@@ -202,7 +236,8 @@ std::vector<Vec2> Level::GenerateFromFile(std::string filename)
 			}
 			catch (...)
 			{
-				throw std::exception("unable to load the place of the Obstacles");
+				std::string s = "unable to load the place of the Obstacles from file: " + filename;
+				throw std::exception(s.c_str());
 			}
 			c = fin.get();
 			buffer = "";
@@ -217,7 +252,8 @@ std::vector<Vec2> Level::GenerateFromFile(std::string filename)
 			}
 			catch (...)
 			{
-				throw std::exception("unable to load the place of the Obstacles");
+				std::string s = "unable to load the place of the Obstacles from file: " + filename;
+				throw std::exception(s.c_str());
 			}
 		}
 		c = fin.get();

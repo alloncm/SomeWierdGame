@@ -51,7 +51,7 @@ void SimplePlayer::Update(float dt, Rect<int> border, std::vector<D2Character*> 
 {
 	Vec2 last = this->pos;
 	D2Character::Update(dt);
-	if (!canMove||!InsideScreen())
+	if (!canMove)
 	{
 		this->pos = last;
 	}
